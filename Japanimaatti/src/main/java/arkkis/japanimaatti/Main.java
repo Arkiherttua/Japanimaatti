@@ -11,7 +11,8 @@ public class Main {
     public static void main( String[] args ){
         Ajastinmaatti ajastin = new Ajastinmaatti();
         Kertausmaatti kertain = new Kertausmaatti();
-        TekstiUI ui = new TekstiUI();
+        TekstiUI ui = new TekstiUI(ajastin, kertain);
+        ajastin.setUI(ui);
         ui.alku();
     }
 }

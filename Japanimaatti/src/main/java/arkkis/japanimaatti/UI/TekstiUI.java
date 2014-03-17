@@ -5,6 +5,8 @@
 
 
 package arkkis.japanimaatti.UI;
+import arkkis.japanimaatti.logiikka.*;
+import arkkis.japanimaatti.tallennus.Tiedostonkasittelija;
 import java.util.Scanner;
 /**
  *
@@ -12,9 +14,15 @@ import java.util.Scanner;
  */
 public class TekstiUI {
     Scanner lukija;
+    Ajastinmaatti ajastin;
+    Kertausmaatti kertain;
     
-    public TekstiUI(){
+    public TekstiUI(Ajastinmaatti a, Kertausmaatti k){
         lukija = new Scanner(System.in);
+        ajastin = a;
+        kertain = k;
+        //a.setKasittelija(new Tiedostonkasittelija());
+        
     }
     
     public void alku(){
@@ -37,7 +45,7 @@ public class TekstiUI {
         if (syote.equals("1")){
             System.out.println("Ei vielä tuettu");
         } else if (syote.equals("2")){
-            System.out.println("Ei vielä tuettu");
+            ajastinmaatti();
         } else if (syote.equals("exit")){
             return;
         } else {
@@ -45,5 +53,27 @@ public class TekstiUI {
         }
         menu();
         
+    }
+    
+    public void ajastinmaatti(){
+        System.out.println("Kuinka pitkäksi ajaksi haluat ajastaa (minuutteina)?");
+        int syote = 0;
+        while (true){
+            try {
+                syote = lukija.nextInt();
+                break;
+            } catch (Exception e){
+                System.out.println("Anna positiivinen kokonaisluku, jooko");
+            }
+        }
+        
+        ajastin.ajasta(syote);
+        System.out.println("");
+        System.out.println("Ajastus päällä.");
+        System.out.println("");
+    }
+    
+    public void ajastusOhi(){
+        System.out.println("Ajastus ohi! Mitä opiskelit?");
     }
 }
