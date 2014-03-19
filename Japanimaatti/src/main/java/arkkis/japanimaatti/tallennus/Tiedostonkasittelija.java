@@ -2,6 +2,7 @@
 package arkkis.japanimaatti.tallennus;
 
 import java.io.File;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 
@@ -14,6 +15,15 @@ public class Tiedostonkasittelija {
         
     }
     
+    public String lueTiedosto() throws NullPointerException{
+
+        if (lukija.hasNext()){
+            return lukija.next();
+        } else {
+            return "TIEDOSTON LOPPU";
+        }
+       
+    }
     
     
     public boolean setFile(String nimi){

@@ -5,7 +5,7 @@
 package arkkis.japanimaatti.logiikka;
 
 import arkkis.japanimaatti.UI.TekstiUI;
-import arkkis.japanimaatti.tallennus.Tiedostonkasittelija;
+import arkkis.japanimaatti.tallennus.*;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -14,16 +14,17 @@ import java.util.TimerTask;
  * @author Kulmala
  */
 public class Ajastinmaatti {
-    Tiedostonkasittelija kasittelija;
     TekstiUI UI;
+    AjastimenTiedot ajastimenTiedot;
+    
+    public Ajastinmaatti(){
+        ajastimenTiedot = new AjastimenTiedot();
+    }
     
     public void setUI(TekstiUI UI){ //jossain vaiheessa ui:sta tullee rajapinta ei luokka
         this.UI = UI;
     }
     
-    public void setKasittelija(){
-        kasittelija = new Tiedostonkasittelija();
-    }
     
     public void ajasta(int aika){
         Timer ajastin = new Timer(true);

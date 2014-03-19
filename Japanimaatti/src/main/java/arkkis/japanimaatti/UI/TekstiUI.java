@@ -74,6 +74,6 @@ public class TekstiUI {
     }
     
     public void ajastusOhi(){
-        System.out.println("Ajastus ohi! Mitä opiskelit?");
+        System.out.println("Ajastus ohi!");
     }
 }
