@@ -19,12 +19,17 @@ public class Ajastinmaatti {
     
     public Ajastinmaatti(){
         ajastimenTiedot = new AjastimenTiedot();
+        ajastimenTiedot.setFile();
+        ajastimenTiedot.LueTiedotTiedostosta();
     }
     
     public void setUI(TekstiUI UI){ //jossain vaiheessa ui:sta tullee rajapinta ei luokka
         this.UI = UI;
     }
     
+    public String tulostaTiedot(){
+        return ajastimenTiedot.tulostaTiedot();
+    }
     
     public void ajasta(int aika){
         Timer ajastin = new Timer(true);
@@ -34,7 +39,7 @@ public class Ajastinmaatti {
                 public void run() {   
                     UI.ajastusOhi();
                 }
-            }, aika * 60 * 1000); //aika oletetaan siis annettavaksi minuutteina
+            }, aika * 1000); //aika oletetaan siis annettavaksi sekunteina
         
 //        ajastin.scheduleAtFixedRate(
 //            new TimerTask() {

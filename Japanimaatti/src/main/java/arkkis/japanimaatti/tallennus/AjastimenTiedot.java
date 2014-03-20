@@ -22,7 +22,19 @@ public class AjastimenTiedot {
     }
     
     public void setFile(){
-        kasittelija.setFile(null); //tähän sen tiedoston nimi!!!
+        kasittelija.setFile("JapanimaatinTiedostot/ajastintiedosto.txt"); //tähän sen tiedoston nimi!!!
+    }
+    
+    public void setFile(String polku){
+        kasittelija.setFile(polku);
+    }
+    
+    public String tulostaTiedot(){
+        String palautettava = "Tässä tilastot opiskelustasi: \n";
+        for (String avain: opiskelut.keySet()) {
+            palautettava += avain + " " + opiskelut.get(avain) + "\n";
+        }
+        return palautettava;
     }
     
     public void LueTiedotTiedostosta(){
@@ -33,12 +45,16 @@ public class AjastimenTiedot {
             System.out.println("URPO!"); //tähän jotain fiksua joskus
         }
         
-        while (!kasittelija.lueTiedosto().equals("TIEDOSTON LOPPU")){
+        String luettu = kasittelija.lueTiedosto();
+        
+        while (!luettu.equals("TIEDOSTON LOPPU")){
             try {
-                
+                int arvo = Integer.parseInt(luettu);
+                opiskelut.put(menossaMappiin, arvo);
             } catch (Exception e){
-                
+                menossaMappiin = luettu;
             }
+            luettu = kasittelija.lueTiedosto();
         }
     }
 }

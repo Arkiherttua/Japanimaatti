@@ -56,17 +56,17 @@ public class TekstiUI {
     }
     
     public void ajastinmaatti(){
-        System.out.println("Kuinka pitkäksi ajaksi haluat ajastaa (minuutteina)?");
+        System.out.println("Kuinka pitkäksi ajaksi haluat ajastaa (sekunteina)?");
         int syote = 0;
         while (true){
             try {
-                syote = lukija.nextInt();
+                syote = Integer.parseInt(lukija.nextLine());
                 break;
             } catch (Exception e){
                 System.out.println("Anna positiivinen kokonaisluku, jooko");
             }
+
         }
-        
         ajastin.ajasta(syote);
         System.out.println("");
         System.out.println("Ajastus päällä.");
@@ -75,5 +75,10 @@ public class TekstiUI {
     
     public void ajastusOhi(){
         System.out.println("Ajastus ohi!");
+        tulostaTilastot();
+    }
+    
+    public void tulostaTilastot(){
+        System.out.println(ajastin.tulostaTiedot());
     }
 }

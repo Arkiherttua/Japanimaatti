@@ -1,0 +1,3 @@
+opiskeluasia1 20
+opiskeluasia2 10
+opiskeluasia3 3
