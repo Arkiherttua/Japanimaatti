@@ -37,6 +37,24 @@ public class AjastimenTiedot {
         return palautettava;
     }
     
+    public String getOpiskellutAiheet(){
+        String palautettava = "";
+        for (String avain : opiskelut.keySet()) {
+            palautettava += avain + "\n";
+        }
+        //palautettava = palautettava.substring(0, palautettava.length()-3);
+        return palautettava;
+    }
+    
+    public void lisaaUusiOpiskelu(String opiskeltava, int minuuttia){
+        opiskeltava = opiskeltava.toLowerCase(); // varmistetaan ettei esim. caps lock haittaa
+            if (opiskelut.containsKey(opiskeltava)){
+                minuuttia += opiskelut.get(opiskeltava);
+            }
+            opiskelut.put(opiskeltava, minuuttia);
+        
+    }
+    
     public void LueTiedotTiedostosta(){
         String menossaMappiin = "";
         try {
@@ -56,5 +74,13 @@ public class AjastimenTiedot {
             }
             luettu = kasittelija.lueTiedosto();
         }
+    }
+    
+    public void tallennaTiedostoon(){
+        String palautettava = "";
+        for (String avain: opiskelut.keySet()) {
+            palautettava += avain + " " + opiskelut.get(avain) + " ";
+        }
+        kasittelija.tallennaTiedostoon(palautettava);
     }
 }

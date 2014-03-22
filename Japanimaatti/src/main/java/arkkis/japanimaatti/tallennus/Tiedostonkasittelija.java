@@ -15,6 +15,18 @@ public class Tiedostonkasittelija {
         
     }
     
+    public void tallennaTiedostoon(String talletettava){
+        try {
+            PrintWriter kirjoitin = new PrintWriter(tiedosto);
+            kirjoitin.print(talletettava);
+            kirjoitin.close();
+        } catch (Exception e){
+            System.out.println("Tiedostoa ei löydy, ei talletettu");
+        }
+        
+        
+    }
+    
     public String lueTiedosto() throws NullPointerException{
 
         if (lukija.hasNext()){

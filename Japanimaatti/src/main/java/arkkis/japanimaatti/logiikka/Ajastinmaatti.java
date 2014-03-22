@@ -27,8 +27,20 @@ public class Ajastinmaatti {
         this.UI = UI;
     }
     
+    public String opiskellutAsiat(){
+        return ajastimenTiedot.getOpiskellutAiheet();
+    }
+    
+    public void lisaaUusiOpiskelu(String opiskeltava, int minuuttia){
+        ajastimenTiedot.lisaaUusiOpiskelu(opiskeltava, minuuttia);
+    }
+    
     public String tulostaTiedot(){
         return ajastimenTiedot.tulostaTiedot();
+    }
+    
+    public void tallennaTiedot(){
+        ajastimenTiedot.tallennaTiedostoon();
     }
     
     public void ajasta(int aika){

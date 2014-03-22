@@ -47,6 +47,7 @@ public class TekstiUI {
         } else if (syote.equals("2")){
             ajastinmaatti();
         } else if (syote.equals("exit")){
+            ajastin.tallennaTiedot();
             return;
         } else {
             System.out.println("Komentoa ei tunnistettu");
@@ -67,6 +68,12 @@ public class TekstiUI {
             }
 
         }
+        System.out.println("");
+        System.out.println("Mitä opiskelet? Syötä jonkun jo opiskelemasi aiheen nimi tai uusi aihe");
+        System.out.println("Jo opiskeltuja asioita: \n" + ajastin.opiskellutAsiat());
+        String opiskeltava = lukija.next();
+        ajastin.lisaaUusiOpiskelu(opiskeltava, syote); //jossain tulevassa versiossa tämä lisätään vasta ajastuksen jälkeen
+        
         ajastin.ajasta(syote);
         System.out.println("");
         System.out.println("Ajastus päällä.");

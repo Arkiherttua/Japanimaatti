@@ -1,3 +1,1 @@
-opiskeluasia1 20
-opiskeluasia2 10
-opiskeluasia3 3
+opiskeluasia2 10 opiskeluasia3 20 opiskeluasia1 20 
