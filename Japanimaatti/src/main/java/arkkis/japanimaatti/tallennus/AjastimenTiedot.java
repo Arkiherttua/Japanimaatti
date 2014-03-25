@@ -13,11 +13,11 @@ import java.util.HashMap;
  * @author ainohaav@cs
  */
 public class AjastimenTiedot {
-    HashMap<String, Integer> opiskelut;
-    Tiedostonkasittelija kasittelija;
+    private HashMap<String, Integer> opiskelut;
+    private Tiedostonkasittelija kasittelija;
     
     public AjastimenTiedot(){
-        opiskelut = new HashMap<>();
+        opiskelut = new HashMap<String, Integer>();
         kasittelija = new Tiedostonkasittelija();
     }
     
@@ -27,6 +27,10 @@ public class AjastimenTiedot {
     
     public void setFile(String polku){
         kasittelija.setFile(polku);
+    }
+    
+    public HashMap getOpiskelut(){
+        return this.opiskelut;
     }
     
     public String tulostaTiedot(){

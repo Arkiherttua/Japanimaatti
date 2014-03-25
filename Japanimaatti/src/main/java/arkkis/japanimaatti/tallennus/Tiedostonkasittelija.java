@@ -37,6 +37,9 @@ public class Tiedostonkasittelija {
        
     }
     
+    public File getFile(){
+        return tiedosto;
+    }
     
     public boolean setFile(String nimi){
         try {
