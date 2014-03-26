@@ -33,6 +33,10 @@ public class AjastimenTiedot {
         return this.opiskelut;
     }
     
+    public Tiedostonkasittelija getTiedostonkasittelija(){
+        return kasittelija;
+    }
+    
     public String tulostaTiedot(){
         String palautettava = "Tässä tilastot opiskelustasi: \n";
         for (String avain: opiskelut.keySet()) {

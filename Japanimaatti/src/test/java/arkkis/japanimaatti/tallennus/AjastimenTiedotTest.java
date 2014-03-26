@@ -57,6 +57,60 @@ public class AjastimenTiedotTest {
     }
     
     @Test
+    public void TallentaminenToimiiKunKasvatetaanOlemassaOlevaa(){
+        kirjoitaOikeanmuotoinenSyote();
+        tiedot.LueTiedotTiedostosta();
+        tiedot.lisaaUusiOpiskelu("opiskelu1", 5);
+        tiedot.tallennaTiedostoon();
+        
+        String luettu = lukija.next();
+        while (lukija.hasNext()){
+            luettu += " " + lukija.next();
+        }
+        assertEquals("opiskelu1 15 opiskelu2 20", luettu);
+    }
+    
+    @Test
+    public void TallentaminenToimiiKunLisataanUusi(){
+        kirjoitaOikeanmuotoinenSyote();
+        tiedot.LueTiedotTiedostosta();
+        tiedot.lisaaUusiOpiskelu("opiskelu3", 30);
+        tiedot.tallennaTiedostoon();
+        
+        String luettu = lukija.next();
+        while (lukija.hasNext()){
+            luettu += " " + lukija.next();
+        }
+        assertEquals("opiskelu1 10 opiskelu2 20 opiskelu3 30", luettu);
+    }
+    
+    @Test
+    public void opiskelunLisaaminenToimiiKunSamaKuinEnnen(){
+        kirjoitaOikeanmuotoinenSyote();
+        tiedot.LueTiedotTiedostosta();
+        tiedot.lisaaUusiOpiskelu("opiskelu1", 5);
+        String mappiinTallennetutTiedot = "";
+        HashMap<String, Integer> kartta = tiedot.getOpiskelut();
+        for (String avain: kartta.keySet()){
+            mappiinTallennetutTiedot += avain + " " + kartta.get(avain) + " ";
+        }
+        assertEquals("opiskelu1 15 opiskelu2 20 ", mappiinTallennetutTiedot);
+    }
+    
+    @Test
+    public void opiskelunLisaaminenToimiiKunEriKuinEnnen(){
+        //kirjoitaOikeanmuotoinenSyote();
+        tiedot.LueTiedotTiedostosta();
+        tiedot.lisaaUusiOpiskelu("uusiopiskelu", 5);
+        String mappiinTallennetutTiedot = "";
+        HashMap<String, Integer> kartta = tiedot.getOpiskelut();
+        for (String avain: kartta.keySet()){
+            mappiinTallennetutTiedot += avain + " " + kartta.get(avain) + " ";
+        }
+        assertEquals("uusiopiskelu 5 ", mappiinTallennetutTiedot);
+    }
+    
+    @Test
     public void tiedostonLukeminenToimiiOikeallaSyotteella(){
         kirjoitaOikeanmuotoinenSyote();
         

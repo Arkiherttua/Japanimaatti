@@ -1,0 +1,4 @@
+kanji1	‰‰nt‰mys1	suomennos1	tunniste1
+kanji2	‰‰nt‰mys2	suomennos2	tunniste1
+kanji3	‰‰nt‰mys3	suomennos3	tunniste2
+kanji4	‰‰nt‰mys4	suomennos4	tunniste3
