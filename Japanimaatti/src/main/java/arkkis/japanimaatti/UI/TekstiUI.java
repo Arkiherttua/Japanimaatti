@@ -43,7 +43,7 @@ public class TekstiUI {
         String syote = lukija.nextLine();
         
         if (syote.equals("1")){
-            System.out.println("Ei vielä tuettu");
+            kertausmaatti();
         } else if (syote.equals("2")){
             ajastinmaatti();
         } else if (syote.equals("exit")){
@@ -85,7 +85,22 @@ public class TekstiUI {
         tulostaTilastot();
     }
     
+    public void tulosta(String tulostettava){
+        System.out.println(tulostettava);
+    }
+    
+    public void tulostaJaVaadiEnter(String tulostettava){
+        System.out.println(tulostettava);
+        String syote = lukija.next();
+    }
+    
     public void tulostaTilastot(){
         System.out.println(ajastin.tulostaTiedot());
+    }
+
+    private void kertausmaatti() {
+        System.out.println("Avasit kertausmaatin. Joskus vielä tästä seuraa kaikkea hienoa");
+        System.out.println("Toistaiseksi tämä vain pyörittää kovakoodatun tiedoston sisältöä. Kerran.");
+        kertain.kertaaKaikki();
     }
 }

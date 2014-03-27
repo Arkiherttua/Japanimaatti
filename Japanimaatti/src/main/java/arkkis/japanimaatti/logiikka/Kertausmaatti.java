@@ -4,6 +4,7 @@
  */
 package arkkis.japanimaatti.logiikka;
 
+import arkkis.japanimaatti.UI.TekstiUI;
 import arkkis.japanimaatti.tallennus.Tiedostonkasittelija;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -15,9 +16,11 @@ import java.util.Scanner;
 public class Kertausmaatti {
     private Tiedostonkasittelija kasittelija;
     private ArrayList<String> tunnisteet;
+    private TekstiUI ui;
     
     public Kertausmaatti(){
         kasittelija = new Tiedostonkasittelija();
+        kasittelija.setFile("JapanimaatinTiedostot/kanjit.txt"); //kovakoodausta...
         tunnisteet = new ArrayList();
     }
     
@@ -25,14 +28,39 @@ public class Kertausmaatti {
         kasittelija.setFile(tiedostonNimi);
     }
     
+    public void setUI(TekstiUI ui){
+        this.ui = ui;
+    }
+    
+
+    
+    public void kertaaKaikki(){ //joo ei toimi atm, ei tee mitään koska??
+        //tämä paranee vielä paljon tämä ominaisuus...
+        Scanner lukija = luoLukija();
+        while (lukija.hasNextLine()){
+            String rivi = lukija.nextLine();
+            String[] rivinSanat = rivi.split(" ");
+            ui.tulostaJaVaadiEnter(rivinSanat[0]);
+            ui.tulostaJaVaadiEnter(rivinSanat[1]);
+            ui.tulostaJaVaadiEnter(rivinSanat[2]);
+        }
+    }
+    
     public void haeTunnisteet(){
         Scanner lukija = luoLukija();
         while (lukija.hasNextLine()){
             String rivi = lukija.nextLine(); //mene nyt vittu sinne uudelle riville vihaan tiedostoja
-            String[] rivinSanat = rivi.split("\t");
+            String[] rivinSanat = rivi.split(" ");
             lisaaTunniste(rivinSanat[3]);     //tunniste siis aina neljännessä 'sanassa' rivillä
         }
         
+    }
+    public String getTunnisteet(){
+        String palautettava = "";
+        for (String tunniste : tunnisteet) {
+            palautettava += tunniste + " ";
+        }
+        return palautettava;
     }
     
     public void lisaaTunniste(String tunniste){
@@ -52,6 +80,6 @@ public class Kertausmaatti {
     }
     
     public void valitseKerrattavat(){
-        
+        //tähän hieno metodi jossain vaiheessa
     }
 }

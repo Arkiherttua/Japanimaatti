@@ -13,6 +13,7 @@ public class Main {
         Kertausmaatti kertain = new Kertausmaatti();
         TekstiUI ui = new TekstiUI(ajastin, kertain);
         ajastin.setUI(ui);
+        kertain.setUI(ui);
         ui.alku();
     }
 }
