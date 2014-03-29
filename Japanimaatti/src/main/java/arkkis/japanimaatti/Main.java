@@ -1,7 +1,9 @@
 package arkkis.japanimaatti;
 
+import arkkis.japanimaatti.UI.GraafinenUI;
 import arkkis.japanimaatti.UI.TekstiUI;
 import arkkis.japanimaatti.logiikka.*;
+import javax.swing.SwingUtilities;
 
 /**
  * Hello world!
@@ -14,6 +16,8 @@ public class Main {
         TekstiUI ui = new TekstiUI(ajastin, kertain);
         ajastin.setUI(ui);
         kertain.setUI(ui);
-        ui.alku();
+        //ui.alku();
+        GraafinenUI graafinenUI = new GraafinenUI();
+        SwingUtilities.invokeLater(graafinenUI);
     }
 }
