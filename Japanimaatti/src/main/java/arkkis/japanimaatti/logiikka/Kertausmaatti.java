@@ -46,10 +46,14 @@ public class Kertausmaatti {
         }
     }
     
+    public void seuraavaKerrattava(){
+        
+    }
+    
     public void haeTunnisteet(){
         Scanner lukija = luoLukija();
         while (lukija.hasNextLine()){
-            String rivi = lukija.nextLine(); //mene nyt vittu sinne uudelle riville vihaan tiedostoja
+            String rivi = lukija.nextLine(); //mene nyt sinne uudelle riville
             String[] rivinSanat = rivi.split(" ");
             lisaaTunniste(rivinSanat[3]);     //tunniste siis aina neljännessä 'sanassa' rivillä
         }

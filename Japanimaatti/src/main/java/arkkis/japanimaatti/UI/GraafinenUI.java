@@ -33,8 +33,8 @@ public class GraafinenUI implements Runnable{
     public GraafinenUI(){
         this.frame = new JFrame("Japanimaatti");
         this.contentPane = frame.getContentPane();
-        this.ajastinpaneeli = new Ajastinpaneeli();
-        this.kertauspaneeli = new Kertauspaneeli();
+        this.ajastinpaneeli = new Ajastinpaneeli(this); //nämä turhia?
+        this.kertauspaneeli = new Kertauspaneeli(this);
     }
 
     @Override
@@ -56,8 +56,7 @@ public class GraafinenUI implements Runnable{
         JButton tilastonappi = new JButton("Näytä tilastoja");
         
         GridLayout layout = new GridLayout(4, 1);
-        
-        
+
         JPanel menu = new JPanel(layout);
         menu.add(otsikko);
         menu.add(kertausnappi);
@@ -78,8 +77,8 @@ public class GraafinenUI implements Runnable{
         tilastot.add(new JTextField("Ei vielä tuettu"));
         
         JPanel alku = new JPanel();
-        Kertauspaneeli kertain = new Kertauspaneeli();
-        Ajastinpaneeli ajastin = new Ajastinpaneeli();
+        Kertauspaneeli kertain = new Kertauspaneeli(this);
+        Ajastinpaneeli ajastin = new Ajastinpaneeli(this);
         cards.add(alku, "alku");
         cards.add(tilastot, "tilastot");
         cards.add(kertain, "kertain");
@@ -93,19 +92,17 @@ public class GraafinenUI implements Runnable{
     }
     
     public void ajastinmaatti(){
-        CardLayout cd = (CardLayout)cards.getLayout();
+        CardLayout cd = (CardLayout)cards.getLayout();   
         cd.show(cards, "ajastin");
     }
     
     public void tilastomaatti(){
-//        JTextField eiVielaTuettu = new JTextField("Ei vielä tuettu");
-//        eiVielaTuettu.setEditable(false);
-//        
-//        JPanel tilastot = new JPanel();
-//        tilastot.add(eiVielaTuettu);
-        
         CardLayout cd = (CardLayout)cards.getLayout();
         cd.show(cards, "tilastot");
+    }
+    
+    public JFrame getFrame(){
+        return frame;
     }
     
 }

@@ -1,3 +1,0 @@
-10 opiskelu1
-20 opiskelu2
-opiskelu3
