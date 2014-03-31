@@ -29,8 +29,9 @@ public class Kertauspaneeli extends JPanel{
     private Kertausmaatti kertain;
     
     public Kertauspaneeli(GraafinenUI ui){
+        super();
         this.ui = ui;
-        fonttikoko = 24;
+        fonttikoko = 24; //joskus vielä tällä tehdään jotain
         
         GridLayout layout = new GridLayout(2, 1);
         this.setLayout(layout);

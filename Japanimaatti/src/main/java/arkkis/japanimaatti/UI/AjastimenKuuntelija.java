@@ -7,6 +7,7 @@ package arkkis.japanimaatti.UI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 /**
@@ -15,10 +16,10 @@ import javax.swing.JTextField;
  */
 public class AjastimenKuuntelija implements ActionListener{
     Ajastinpaneeli ajastinpaneeli;
-    JTextField minuuttimaara;
+    JTextArea minuuttimaara;
     JButton ok;
     
-    public AjastimenKuuntelija(Ajastinpaneeli ajastin, JTextField minuuttimaara, JButton ok){
+    public AjastimenKuuntelija(Ajastinpaneeli ajastin, JTextArea minuuttimaara, JButton ok){
         this.ajastinpaneeli = ajastin;
         this.minuuttimaara = minuuttimaara;
         this.ok = ok;
@@ -27,13 +28,7 @@ public class AjastimenKuuntelija implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(ok)){
-            int minuuttia;
-            try {
-                minuuttia = Integer.parseInt(minuuttimaara.getText());
-            } catch (Exception exc){
-                minuuttia = 1; //väliaikainen random kovakoodaus :D
-            }
-            ajastinpaneeli.setAjastus(minuuttia, "testi"); //kovakoodia tässäkin
+            ajastinpaneeli.setAjastus(); //kovakoodia tässäkin
         }
     }
     

@@ -37,10 +37,11 @@ public class AjastimenTiedot {
         return kasittelija;
     }
     
-    public String tulostaTiedot(){
-        String palautettava = "Tässä tilastot opiskelustasi: \n";
+    public String getOpiskellutAsiatJaOpiskelunKesto(){
+        String palautettava = "";
+        palautettava += "Tässä tilastot opiskelustasi: \n";
         for (String avain: opiskelut.keySet()) {
-            palautettava += avain + " " + opiskelut.get(avain) + "\n";
+            palautettava += avain + " " + opiskelut.get(avain) + " minuuttia \n";
         }
         return palautettava;
     }
@@ -48,7 +49,7 @@ public class AjastimenTiedot {
     public String getOpiskellutAiheet(){
         String palautettava = "";
         for (String avain : opiskelut.keySet()) {
-            palautettava += avain + "\n";
+            palautettava += avain + "   ";
         }
         //palautettava = palautettava.substring(0, palautettava.length()-3);
         return palautettava;

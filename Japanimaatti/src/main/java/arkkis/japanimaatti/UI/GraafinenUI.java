@@ -4,6 +4,8 @@
  */
 package arkkis.japanimaatti.UI;
 
+import arkkis.japanimaatti.logiikka.Ajastinmaatti;
+import arkkis.japanimaatti.logiikka.Kertausmaatti;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Container;
@@ -27,14 +29,20 @@ import javax.swing.WindowConstants;
 public class GraafinenUI implements Runnable{
     private JFrame frame;
     private Container contentPane;
-    private JPanel kertauspaneeli, ajastinpaneeli;
+    private Kertauspaneeli kertauspaneeli;
+    private Ajastinpaneeli ajastinpaneeli;
     private JPanel cards;
+    private Kertausmaatti kertausmaatti;
+    private Ajastinmaatti ajastinmaatti;
+    private Tilastopaneeli tilastot;
     
-    public GraafinenUI(){
+    public GraafinenUI(Kertausmaatti kertain, Ajastinmaatti ajastin){
         this.frame = new JFrame("Japanimaatti");
         this.contentPane = frame.getContentPane();
-        this.ajastinpaneeli = new Ajastinpaneeli(this); //nämä turhia?
-        this.kertauspaneeli = new Kertauspaneeli(this);
+        //this.ajastinpaneeli = new Ajastinpaneeli(this); //nämä turhia?
+        //this.kertauspaneeli = new Kertauspaneeli(this);
+        this.kertausmaatti = kertain;
+        this.ajastinmaatti = ajastin;
     }
 
     @Override
@@ -73,12 +81,14 @@ public class GraafinenUI implements Runnable{
         cards = new JPanel(new CardLayout());
         contentPane.add(cards);
 
-        JPanel tilastot = new JPanel();
-        tilastot.add(new JTextField("Ei vielä tuettu"));
+        this.tilastot = new Tilastopaneeli(this);
+        //tilastot.add(new JTextField("Ei vielä tuettu"));
         
         JPanel alku = new JPanel();
         Kertauspaneeli kertain = new Kertauspaneeli(this);
-        Ajastinpaneeli ajastin = new Ajastinpaneeli(this);
+        Ajastinpaneeli ajastin = new Ajastinpaneeli(this.ajastinmaatti, this);
+        this.ajastinpaneeli = ajastin;
+        this.kertauspaneeli = kertain;
         cards.add(alku, "alku");
         cards.add(tilastot, "tilastot");
         cards.add(kertain, "kertain");
@@ -86,23 +96,44 @@ public class GraafinenUI implements Runnable{
         
     }
     
+    
     public void kertausmaatti(){
+        ajastinmaatti.tallennaTiedot(); //tallenna tiedot aina, kun siirretään korttiin joka ei ole ajastin
         CardLayout cd = (CardLayout)cards.getLayout();
         cd.show(cards, "kertain");
     }
     
     public void ajastinmaatti(){
+        ajastinpaneeli.paivita();
         CardLayout cd = (CardLayout)cards.getLayout();   
         cd.show(cards, "ajastin");
     }
     
     public void tilastomaatti(){
+        tilastot.paivita();
+        ajastinmaatti.tallennaTiedot(); //ks seuraava kommenttti ylöspäin mennessä
         CardLayout cd = (CardLayout)cards.getLayout();
         cd.show(cards, "tilastot");
     }
     
     public JFrame getFrame(){
         return frame;
+    }
+    
+    public Ajastinpaneeli getAjastinpaneeli(){
+        return this.ajastinpaneeli; 
+    }
+    
+    public Kertauspaneeli getKertauspaneeli(){
+        return this.kertauspaneeli;
+    }
+    
+    public Kertausmaatti getKertausmaatti(){
+        return kertausmaatti;
+    }
+    
+    public Ajastinmaatti getAjastinmaatti(){
+        return ajastinmaatti;
     }
     
 }

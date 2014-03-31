@@ -15,9 +15,12 @@ public class Main {
         Kertausmaatti kertain = new Kertausmaatti();
         TekstiUI ui = new TekstiUI(ajastin, kertain);
         ajastin.setUI(ui);
+        
         kertain.setUI(ui);
         //ui.alku();
-        GraafinenUI graafinenUI = new GraafinenUI();
+        GraafinenUI graafinenUI = new GraafinenUI(kertain, ajastin);
+        ajastin.setGUI(graafinenUI);
         SwingUtilities.invokeLater(graafinenUI);
+        
     }
 }

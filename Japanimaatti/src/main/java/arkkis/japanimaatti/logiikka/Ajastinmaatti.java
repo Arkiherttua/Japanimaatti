@@ -4,6 +4,7 @@
  */
 package arkkis.japanimaatti.logiikka;
 
+import arkkis.japanimaatti.UI.GraafinenUI;
 import arkkis.japanimaatti.UI.TekstiUI;
 import arkkis.japanimaatti.tallennus.*;
 import java.util.Timer;
@@ -14,8 +15,9 @@ import java.util.TimerTask;
  * @author Kulmala
  */
 public class Ajastinmaatti {
-    TekstiUI UI;
-    AjastimenTiedot ajastimenTiedot;
+    private TekstiUI UI;
+    private GraafinenUI GUI;
+    private AjastimenTiedot ajastimenTiedot;
     
     public Ajastinmaatti(){
         ajastimenTiedot = new AjastimenTiedot();
@@ -27,8 +29,16 @@ public class Ajastinmaatti {
         this.UI = UI;
     }
     
+    public void setGUI(GraafinenUI GUI){
+        this.GUI = GUI;
+    }
+    
     public String opiskellutAsiat(){
         return ajastimenTiedot.getOpiskellutAiheet();
+    }
+    
+    public String getOpiskellutAsiatJaOpiskelunKesto(){
+        return ajastimenTiedot.getOpiskellutAsiatJaOpiskelunKesto();
     }
     
     public void lisaaUusiOpiskelu(String opiskeltava, int minuuttia){
@@ -36,7 +46,7 @@ public class Ajastinmaatti {
     }
     
     public String tulostaTiedot(){
-        return ajastimenTiedot.tulostaTiedot();
+        return ajastimenTiedot.getOpiskellutAsiatJaOpiskelunKesto();
     }
     
     public void tallennaTiedot(){
@@ -49,9 +59,10 @@ public class Ajastinmaatti {
         ajastin.schedule(
             new TimerTask() {
                 public void run() {   
-                    UI.ajastusOhi();
+                    //UI.ajastusOhi();
+                    GUI.getAjastinpaneeli().ajastusOhi(); //tää kaataa ohjelman koska??
                 }
-            }, aika * 1000); //aika oletetaan siis annettavaksi sekunteina
+            }, aika * 1000); //aika oletetaan siis annettavaksi sekunteina nyt testivaiheessa
         
 //        ajastin.scheduleAtFixedRate(
 //            new TimerTask() {
