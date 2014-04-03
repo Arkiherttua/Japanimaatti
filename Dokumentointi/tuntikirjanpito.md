@@ -44,3 +44,11 @@ Kaksi tuntia kertausmaatin tekoa ja testejäkin vähän
 To 27.3
 =======
 Aika lailla samaa kuin eilen saman aikaa. Myös pitin konffaamista.
+
+La 29.3
+=======
+Käyttöliittymän aloitus, 2,5 tuntia googletusta ja koodausta
+
+Su 30.3
+=======
+Käyttöliittymän rakentelua, tunti koodausta
