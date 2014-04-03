@@ -60,7 +60,7 @@ public class Ajastinmaatti {
             new TimerTask() {
                 public void run() {   
                     //UI.ajastusOhi();
-                    GUI.getAjastinpaneeli().ajastusOhi(); //tää kaataa ohjelman koska??
+                    GUI.getAjastinpaneeli().ajastusOhi();
                 }
             }, aika * 1000); //aika oletetaan siis annettavaksi sekunteina nyt testivaiheessa
         

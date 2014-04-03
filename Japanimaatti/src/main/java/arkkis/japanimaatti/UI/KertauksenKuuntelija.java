@@ -28,7 +28,8 @@ public class KertauksenKuuntelija implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(seuraava)){
-            kertauspaneeli.seuraava();
+            kertauspaneeli.naytaSeuraava();
+            //String seuraava = kertauspaneeli.annaMerkki();
         }else if (e.getSource().equals(osasin)){
             
         } else if (e.getSource().equals(melkein)){

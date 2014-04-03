@@ -4,6 +4,8 @@
  */
 package arkkis.japanimaatti.UI;
 
+import arkkis.japanimaatti.logiikka.KertausmaatinTila;
+import static arkkis.japanimaatti.logiikka.KertausmaatinTila.*;
 import arkkis.japanimaatti.logiikka.Kertausmaatti;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -27,19 +29,23 @@ public class Kertauspaneeli extends JPanel{
     private GraafinenUI ui;
     private JPanel cards;
     private Kertausmaatti kertain;
+    private JTextArea ekaTekstikentta;
+    private JTextArea tokaTekstikentta;
     
-    public Kertauspaneeli(GraafinenUI ui){
-        super();
+    public Kertauspaneeli(Kertausmaatti kertain, GraafinenUI ui){
+        //super();
         this.ui = ui;
         fonttikoko = 24; //joskus vielä tällä tehdään jotain
+        this.kertain = kertain;
+        kertain.setKertauspaneeli(this);
         
         GridLayout layout = new GridLayout(2, 1);
         this.setLayout(layout);
         
         //BorderLayout layout = new BorderLayout();
-        JTextArea ekaTekstikentta = new JTextArea("Ruutu 1");
+        ekaTekstikentta = new JTextArea("Ruutu 1");
         ekaTekstikentta.setEditable(false);
-        JTextArea tokaTekstikentta = new JTextArea("Ruutu 2");
+        tokaTekstikentta = new JTextArea("Ruutu 2");
         tokaTekstikentta.setEditable(false);
         GridLayout tekstiLayout = new GridLayout(1, 2);
         
@@ -78,8 +84,22 @@ public class Kertauspaneeli extends JPanel{
         hankiTiedosto();
     }
     
-    public void seuraava(){
-        kertain.seuraavaKerrattava();
+    public void naytaSeuraava(){
+        String naytettava = kertain.annaSeuraava();
+        if (kertain.getTila() == KertausmaatinTila.TYHJA){ //jos ollaan alussa, näytetään ekassa tekstikentässä, muuten tokassa
+            ekaTekstikentta.setText(naytettava);
+        } else {
+            tokaTekstikentta.setText(naytettava);
+        }
+        //kertain.seuraavaKerrattava();
+    }
+    
+    public void naytaTekstiaEkassaKentassa(String naytettava){
+        ekaTekstikentta.setText(naytettava);
+    }
+    
+    public void naytaTekstiaTokassaKentassa(String naytettava){
+        tokaTekstikentta.setText(naytettava);
     }
     
     

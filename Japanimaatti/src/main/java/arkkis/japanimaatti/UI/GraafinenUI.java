@@ -85,7 +85,7 @@ public class GraafinenUI implements Runnable{
         //tilastot.add(new JTextField("Ei vielä tuettu"));
         
         JPanel alku = new JPanel();
-        Kertauspaneeli kertain = new Kertauspaneeli(this);
+        Kertauspaneeli kertain = new Kertauspaneeli(this.kertausmaatti, this);
         Ajastinpaneeli ajastin = new Ajastinpaneeli(this.ajastinmaatti, this);
         this.ajastinpaneeli = ajastin;
         this.kertauspaneeli = kertain;
