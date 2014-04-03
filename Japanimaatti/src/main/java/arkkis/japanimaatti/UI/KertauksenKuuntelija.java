@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author Kulmala
+ * kertauksen kuuntelija kuuntelee kertauksene liittyviä nappeja
  */
 public class KertauksenKuuntelija implements ActionListener{
     Kertauspaneeli kertauspaneeli;

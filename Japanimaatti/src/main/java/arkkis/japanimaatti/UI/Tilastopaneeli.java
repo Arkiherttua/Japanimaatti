@@ -11,7 +11,7 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author Kulmala
+ * Tilastopaneeli muodostaa yhden 'kortin' käyttöliittymään, kortin joka on näkyvissä kun käyttäjä katselee tilastoja
  */
 public class Tilastopaneeli extends JPanel{
     private GraafinenUI ui;

@@ -11,8 +11,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
+ * Ajastinmaatti hoitaa ajastuksen, ja kutsuu AjastimenTiedot-luokan tallennus- yms. metodeita
  *
- * @author Kulmala
  */
 public class Ajastinmaatti {
     private TekstiUI UI;
@@ -53,6 +53,10 @@ public class Ajastinmaatti {
         ajastimenTiedot.tallennaTiedostoon();
     }
     
+    /**
+     * Metodi toteuttaa varsinaisen ajastuksen javan Timer-luokkaa käyttäen
+     * @param aika käyttäjän antama aika ajastukselle. Lopullisessa versiossa minuutteja, toistaiseksi sekunteja.
+     */
     public void ajasta(int aika){
         Timer ajastin = new Timer(true);
         

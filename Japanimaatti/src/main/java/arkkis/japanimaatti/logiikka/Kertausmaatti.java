@@ -14,7 +14,7 @@ import java.util.Random;
 
 /**
  *
- * @author Kulmala
+ * Kertausmaatissa on kertaukseen liittyvä logiikka
  */
 public class Kertausmaatti {
     private Tiedostonkasittelija kasittelija;
@@ -45,9 +45,11 @@ public class Kertausmaatti {
         this.ui = ui;
     }
     
-
+    /**
+     * Käytöstä pois jäänyt metodi joka luultavasti poistetaan...
+     */
     
-    public void kertaaKaikki(){ //joo ei toimi atm, ei tee mitään koska??
+    public void kertaaKaikki(){
         //tämä paranee vielä paljon tämä ominaisuus...
 //        Scanner lukija = luoLukija();
 //        while (lukija.hasNextLine()){
@@ -84,6 +86,9 @@ public class Kertausmaatti {
         return palautettava;
     }
     
+    /**
+     * KertauksenKuuntelija kutsuu tätä metodia, joka tarkistaa, missä vaiheessa kertausta mennään ja asettaa seuraavan asian näkyviin
+     */
     public String annaSeuraava(){
         if (tila == KertausmaatinTila.TYHJA){
             seuraavaKerrattava();
@@ -100,6 +105,9 @@ public class Kertausmaatti {
         }
     }
     
+    /**
+     * Kun kertaus aloitetaan, kutsutaan tätä metodia joka käy läpi tiedoston ja tekee listan siinä esiintyvistä tunnisteista
+     */
     public void haeTunnisteet(){
         Scanner lukija = luoLukija();
         while (lukija.hasNextLine()){
@@ -107,8 +115,8 @@ public class Kertausmaatti {
             String[] rivinSanat = rivi.split(" ");
             lisaaTunniste(rivinSanat[3]);     //tunniste siis aina neljännessä 'sanassa' rivillä
         }
-        
     }
+   
     public String getTunnisteet(){
         String palautettava = "";
         for (String tunniste : tunnisteet) {

@@ -23,8 +23,8 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 /**
- *
- * @author Kulmala
+ * Kayttoliittymäluokkien 'pääluokka'
+ * 
  */
 public class GraafinenUI implements Runnable{
     private JFrame frame;
@@ -96,6 +96,14 @@ public class GraafinenUI implements Runnable{
         
     }
     
+    public JButton luoNappi(String teksti){
+        JButton nappi = new JButton(teksti);
+        return nappi;
+    }
+    
+    public JPanel luoValikkopaneeli(){
+        return null;
+    }
     
     public void kertausmaatti(){
         ajastinmaatti.tallennaTiedot(); //tallenna tiedot aina, kun siirretään korttiin joka ei ole ajastin

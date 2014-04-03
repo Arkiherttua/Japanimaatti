@@ -12,7 +12,7 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author Kulmala
+ * nomen est omen, ajastimen kuuntelija kuuntelee ajastimeen liittyviä nappeja
  */
 public class AjastimenKuuntelija implements ActionListener{
     Ajastinpaneeli ajastinpaneeli;

@@ -10,7 +10,7 @@ import arkkis.japanimaatti.tallennus.Tiedostonkasittelija;
 import java.util.Scanner;
 /**
  *
- * @author Kulmala
+ * kokeiluversioksi luotu tekstipohjainen käyttöliittymä. Ei enää täysin yhteensopiva ohjelman kanssa.
  */
 public class TekstiUI {
     Scanner lukija;
@@ -32,6 +32,10 @@ public class TekstiUI {
         menu();
         
     }
+    
+    /**
+     * Huonosti toteutettu menun tulostus. Menu nimittäin tulostuu mm. samalla kun ajastus laitetaan päälle.
+     */
     
     public void menu(){
         System.out.println("Tässä vaihtoehdot, mitä voit tehdä:");
@@ -56,6 +60,9 @@ public class TekstiUI {
         
     }
     
+    /**
+     * Kerää käyttäjältä tarpeelliset tiedot, jotta voi kutsua Ajastinaamtin ajastustoimintoa
+     */
     public void ajastinmaatti(){
         System.out.println("Kuinka pitkäksi ajaksi haluat ajastaa (sekunteina)?");
         int syote = 0;

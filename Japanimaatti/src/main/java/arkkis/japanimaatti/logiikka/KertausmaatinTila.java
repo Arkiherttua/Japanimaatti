@@ -8,7 +8,7 @@ package arkkis.japanimaatti.logiikka;
 
 /**
  *
- * @author ainohaav@cs
+ * Kertausmaatin käyttämä enum, joka kertoo missä vaiheessa kertausta ollaan, jotta 
  */
 public enum KertausmaatinTila {
     TYHJA, KANJI, KANA, SUOMI;
