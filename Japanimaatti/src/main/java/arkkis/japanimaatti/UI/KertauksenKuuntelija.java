@@ -11,18 +11,19 @@ import javax.swing.JPanel;
 
 /**
  *
- * kertauksen kuuntelija kuuntelee kertauksene liittyviä nappeja
+ * kertauksen kuuntelija kuuntelee kertaukseen liittyviä nappeja
  */
 public class KertauksenKuuntelija implements ActionListener{
     Kertauspaneeli kertauspaneeli;
-    JButton seuraava, osasin, melkein, enOsannut;
+    JButton seuraava, osasin, melkein, enOsannut, tunnistenappi;
     
-    public KertauksenKuuntelija(Kertauspaneeli kertauspaneeli, JButton seuraava, JButton osasin, JButton melkein, JButton enOsannut){
+    public KertauksenKuuntelija(Kertauspaneeli kertauspaneeli, JButton seuraava, JButton osasin, JButton melkein, JButton enOsannut, JButton tunnistenappi){
         this.kertauspaneeli = kertauspaneeli;
         this.seuraava = seuraava;
         this.osasin = osasin;
         this.melkein = melkein;
         this.enOsannut = enOsannut;
+        this.tunnistenappi = tunnistenappi;
     }
 
     @Override
@@ -31,11 +32,13 @@ public class KertauksenKuuntelija implements ActionListener{
             kertauspaneeli.naytaSeuraava();
             //String seuraava = kertauspaneeli.annaMerkki();
         }else if (e.getSource().equals(osasin)){
-            
+            kertauspaneeli.naytaSeuraava(); //näissä väliaikaista copypastea
         } else if (e.getSource().equals(melkein)){
-            
+            kertauspaneeli.naytaSeuraava();
         } else if (e.getSource().equals(enOsannut)){
-            
+            kertauspaneeli.naytaSeuraava();
+        } else if (e.getSource().equals(tunnistenappi)){
+            kertauspaneeli.haeKerrattavat();
         }
     }
     

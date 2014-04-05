@@ -32,6 +32,8 @@ public class Kertauspaneeli extends JPanel{
     private Kertausmaatti kertain;
     private JTextArea ekaTekstikentta;
     private JTextArea tokaTekstikentta;
+    private JTextArea tunnistelista;
+    private JTextArea tunnistekentta;
     private KertauksenKuuntelija kuuntelija;
     
     public Kertauspaneeli(Kertausmaatti kertain, GraafinenUI ui){
@@ -51,11 +53,16 @@ public class Kertauspaneeli extends JPanel{
         
         JButton seuraava = luoSeuraavanappi();
         JPanel osaamisnapit = luoOsaamisnapit();
-        kuuntelija = new KertauksenKuuntelija(this, seuraava, (JButton)osaamisnapit.getComponent(0), (JButton)osaamisnapit.getComponent(1), (JButton)osaamisnapit.getComponent(2));
+        JButton tunnistenappi = luoTunnistenappi();
+        kuuntelija = new KertauksenKuuntelija(this, seuraava, (JButton)osaamisnapit.getComponent(0), (JButton)osaamisnapit.getComponent(1), (JButton)osaamisnapit.getComponent(2), tunnistenappi);
+        
+        tekstikortit.add(tunnisteidenValinta);
+        tekstikortit.add(tekstikentat);
+        
         nappikortit.add(seuraava);
         nappikortit.add(osaamisnapit);
         
-        this.add(tekstikentat);
+        this.add(tekstikortit);
         this.add(nappikortit);
         
     }
@@ -74,14 +81,14 @@ public class Kertauspaneeli extends JPanel{
     }
     
     private JPanel luoTunnisteidenValinta(){
-        ekaTekstikentta = new JTextArea("Valitsit tiedoston onnistuneesti. Valitse vielä, millä tunnisteella varustetut merkit haluat kerrata. Valittavat tunnisteet:");
-        ekaTekstikentta.setEditable(false);
-        tokaTekstikentta = new JTextArea("Kirjoita tunniste tähän ja paina valitse-nappia.");
+        tunnistelista = new JTextArea("Valitsit tiedoston onnistuneesti. Valitse vielä, millä tunnisteella varustetut merkit haluat kerrata. Valittavat tunnisteet:");
+        tunnistelista.setEditable(false);
+        tunnistekentta = new JTextArea("Kirjoita tunniste tähän ja paina valitse-nappia.");
         GridLayout tekstiLayout = new GridLayout(1, 2);
         
         JPanel tunnisteidenValinta = new JPanel(tekstiLayout);
-        tunnisteidenValinta.add(ekaTekstikentta);
-        tunnisteidenValinta.add(tokaTekstikentta);
+        tunnisteidenValinta.add(tunnistelista);
+        tunnisteidenValinta.add(tunnistekentta);
         return tunnisteidenValinta;
     }
     
@@ -106,6 +113,18 @@ public class Kertauspaneeli extends JPanel{
         seuraava.addActionListener(kuuntelija);
         return seuraava;
     }
+    
+    private JButton luoTunnistenappi(){
+        JButton tunnistenappi = new JButton("valitse tunniste");
+        tunnistenappi.addActionListener(kuuntelija);
+        return tunnistenappi;
+    }
+    
+    public void haeKerrattavat(){
+        String tunniste = tunnistekentta.getText(); //ei turvallista, toistaiseksi maailma hajoaa jos syöttää epäkorrektin tunnisteen
+        kertain.haeKerrattavat(tunniste);
+    }
+    
     public void naytaSeuraava(){
         String naytettava = kertain.annaSeuraava();
         if (kertain.getTila() == KertausmaatinTila.TYHJA){ //jos ollaan alussa, näytetään ekassa tekstikentässä, muuten tokassa

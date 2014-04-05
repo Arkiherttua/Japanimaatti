@@ -105,8 +105,10 @@ public class Kertausmaatti {
         Scanner lukija = luoLukija();
         while (lukija.hasNextLine()){
             String rivi = lukija.nextLine();
-            String[] rivinSanat = rivi.split(" ");
-            kerrattavat.add(rivinSanat);
+            if (rivi.contains(tunniste)){
+                String[] rivinSanat = rivi.split(" ");
+                kerrattavat.add(rivinSanat);
+            }
         }
     }
     
