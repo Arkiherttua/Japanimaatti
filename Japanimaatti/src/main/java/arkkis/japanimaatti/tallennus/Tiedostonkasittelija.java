@@ -70,4 +70,15 @@ public class Tiedostonkasittelija {
         }
         return true;
     }
+    
+    public boolean setFile(File tied){
+        try {
+            tiedosto = tied;
+            lukija = new Scanner(tiedosto);
+        } catch (Exception e){
+            System.out.println("Tiedostoa ei löydy!"); //tähän fiksumpi virheilmoitus joskus
+            return false;
+        }
+        return true;
+    }
 }

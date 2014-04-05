@@ -107,6 +107,8 @@ public class GraafinenUI implements Runnable{
     
     public void kertausmaatti(){
         ajastinmaatti.tallennaTiedot(); //tallenna tiedot aina, kun siirretään korttiin joka ei ole ajastin
+        File kertaustiedosto = kertauspaneeli.hankiTiedosto();
+        kertausmaatti.setTiedosto(kertaustiedosto);
         CardLayout cd = (CardLayout)cards.getLayout();
         cd.show(cards, "kertain");
     }

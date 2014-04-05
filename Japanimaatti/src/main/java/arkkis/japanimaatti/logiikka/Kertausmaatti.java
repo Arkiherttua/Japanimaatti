@@ -7,6 +7,7 @@ package arkkis.japanimaatti.logiikka;
 import arkkis.japanimaatti.UI.Kertauspaneeli;
 import arkkis.japanimaatti.UI.TekstiUI;
 import arkkis.japanimaatti.tallennus.Tiedostonkasittelija;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Collections;
@@ -41,6 +42,10 @@ public class Kertausmaatti {
         kasittelija.setFile(tiedostonNimi);
     }
     
+    public void setTiedosto(File tiedosto){
+        kasittelija.setFile(tiedosto);
+    }
+    
     public void setUI(TekstiUI ui){
         this.ui = ui;
     }
@@ -64,7 +69,7 @@ public class Kertausmaatti {
     public void seuraavaKerrattava(){
         Random random = new Random();
         if (kerrattavat.isEmpty()){
-            paneeli.naytaTekstiaEkassaKentassa("Mitään kerrattavaa ei valittu!");
+            paneeli.naytaTekstiaEkassaKentassa("Mitään kerrattavaa ei valittu!"); //vaatii refaktorointia jotta riippuvuus poistuu...
         } else if (tila == KertausmaatinTila.TYHJA) { //
             moneskoRivi = random.nextInt(kerrattavat.size());
             //kertaaTama(moneskoRivi);

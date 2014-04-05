@@ -35,7 +35,7 @@ public class Ajastinpaneeli extends JPanel{
     /**
      * Metodi luo ajastinpaneeliin kuuluvat tekstikentät
      */
-    public void luoTekstikentat(){
+    private void luoTekstikentat(){
         tekstikentta = new JTextArea("Syötä ajastuksen tiedot ja paina OK");
         tekstikentta.setEditable(false);
         
@@ -48,7 +48,7 @@ public class Ajastinpaneeli extends JPanel{
     /**
      * Metodi lisää kaikki luokan komponentit luokalle itselleen (JPanelille? miten tän nyt ilmaisisi)
      */
-    public void lisaaTekstikentatJaNapit(){
+    private void lisaaTekstikentatJaNapit(){
         this.add(tekstikentta);
         this.add(minuuttimaara);
         this.add(mitaOpiskelet);

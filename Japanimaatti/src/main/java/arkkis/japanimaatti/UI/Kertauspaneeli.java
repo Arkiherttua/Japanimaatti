@@ -27,13 +27,14 @@ import javax.swing.JTextField;
 public class Kertauspaneeli extends JPanel{
     private int fonttikoko;
     private GraafinenUI ui;
-    private JPanel cards;
+    private JPanel nappikortit;
+    private JPanel tekstikortit;
     private Kertausmaatti kertain;
     private JTextArea ekaTekstikentta;
     private JTextArea tokaTekstikentta;
+    private KertauksenKuuntelija kuuntelija;
     
     public Kertauspaneeli(Kertausmaatti kertain, GraafinenUI ui){
-        //super();
         this.ui = ui;
         fonttikoko = 24; //joskus vielä tällä tehdään jotain
         this.kertain = kertain;
@@ -41,23 +42,50 @@ public class Kertauspaneeli extends JPanel{
         
         GridLayout layout = new GridLayout(2, 1);
         this.setLayout(layout);
+
+        JPanel tekstikentat = luoTekstikentat();
+        JPanel tunnisteidenValinta = luoTunnisteidenValinta();
         
-        //BorderLayout layout = new BorderLayout();
-        ekaTekstikentta = new JTextArea("Ruutu 1");
+        this.tekstikortit = new JPanel(new CardLayout());
+        this.nappikortit = new JPanel(new CardLayout());
+        
+        JButton seuraava = luoSeuraavanappi();
+        JPanel osaamisnapit = luoOsaamisnapit();
+        kuuntelija = new KertauksenKuuntelija(this, seuraava, (JButton)osaamisnapit.getComponent(0), (JButton)osaamisnapit.getComponent(1), (JButton)osaamisnapit.getComponent(2));
+        nappikortit.add(seuraava);
+        nappikortit.add(osaamisnapit);
+        
+        this.add(tekstikentat);
+        this.add(nappikortit);
+        
+    }
+    
+    private JPanel luoTekstikentat(){
+        ekaTekstikentta = new JTextArea("Aloita kertaaminen painamalla seuraava-nappia");
         ekaTekstikentta.setEditable(false);
-        tokaTekstikentta = new JTextArea("Ruutu 2");
+        tokaTekstikentta = new JTextArea("");
         tokaTekstikentta.setEditable(false);
         GridLayout tekstiLayout = new GridLayout(1, 2);
         
         JPanel tekstikentat = new JPanel(tekstiLayout);
         tekstikentat.add(ekaTekstikentta);
         tekstikentat.add(tokaTekstikentta);
+        return tekstikentat;
+    }
+    
+    private JPanel luoTunnisteidenValinta(){
+        ekaTekstikentta = new JTextArea("Valitsit tiedoston onnistuneesti. Valitse vielä, millä tunnisteella varustetut merkit haluat kerrata. Valittavat tunnisteet:");
+        ekaTekstikentta.setEditable(false);
+        tokaTekstikentta = new JTextArea("Kirjoita tunniste tähän ja paina valitse-nappia.");
+        GridLayout tekstiLayout = new GridLayout(1, 2);
         
-        this.cards = new JPanel(new CardLayout());
-        
-        JButton seuraava = new JButton("seuraava");
-        cards.add(seuraava);
-        
+        JPanel tunnisteidenValinta = new JPanel(tekstiLayout);
+        tunnisteidenValinta.add(ekaTekstikentta);
+        tunnisteidenValinta.add(tokaTekstikentta);
+        return tunnisteidenValinta;
+    }
+    
+    private JPanel luoOsaamisnapit(){
         JButton osasin = new JButton("osasin");
         JButton melkein = new JButton("melkein osasin");
         JButton enOsannut = new JButton("en vielä osannut");
@@ -67,23 +95,17 @@ public class Kertauspaneeli extends JPanel{
         osaamisnapit.add(melkein);
         osaamisnapit.add(enOsannut);
         
-        KertauksenKuuntelija kuuntelija = new KertauksenKuuntelija(this, seuraava, osasin, melkein, enOsannut);
-        seuraava.addActionListener(kuuntelija);
         osasin.addActionListener(kuuntelija);
         melkein.addActionListener(kuuntelija);
         enOsannut.addActionListener(kuuntelija);
-        
-        cards.add(osaamisnapit);
-        
-        this.add(tekstikentat);
-        this.add(cards);
-        
+        return osaamisnapit;
     }
     
-    public void kertausmaatti(){
-        hankiTiedosto();
+    private JButton luoSeuraavanappi(){
+        JButton seuraava = new JButton("seuraava");
+        seuraava.addActionListener(kuuntelija);
+        return seuraava;
     }
-    
     public void naytaSeuraava(){
         String naytettava = kertain.annaSeuraava();
         if (kertain.getTila() == KertausmaatinTila.TYHJA){ //jos ollaan alussa, näytetään ekassa tekstikentässä, muuten tokassa
@@ -103,8 +125,7 @@ public class Kertauspaneeli extends JPanel{
     }
     
     
-    private File hankiTiedosto(){
-        //String alkuPolku = System.getProperty("user.home") +"\\Documents\\GitHub\\japanimaatti";
+    public File hankiTiedosto(){
         JFileChooser valitsija = new JFileChooser();
         int valinta = valitsija.showOpenDialog(ui.getFrame());
         if (valinta==JFileChooser.APPROVE_OPTION){
