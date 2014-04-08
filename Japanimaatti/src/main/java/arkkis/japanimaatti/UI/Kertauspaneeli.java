@@ -119,33 +119,42 @@ public class Kertauspaneeli extends JPanel{
     }
     
     public void haeKerrattavat(){
-        String tunniste = tunnistekentta.getText(); //ei turvallista, toistaiseksi maailma hajoaa jos syöttää epäkorrektin tunnisteen
+        String tunniste = tunnistekentta.getText();
         kertain.haeKerrattavat(tunniste);
         
         CardLayout cd = (CardLayout)tekstikortit.getLayout();
         cd.show(tekstikortit, "tekstikentat");
-        System.out.println("pöö2");
         CardLayout cd2 = (CardLayout)nappikortit.getLayout();
         cd2.show(nappikortit, "seuraava");
     }
     
     public void naytaSeuraava(){
         String naytettava = kertain.annaSeuraava();
-        if (kertain.getTila() == KertausmaatinTila.KANJI){ //jos ollaan alussa, näytetään ekassa tekstikentässä, muuten tokassa
+        if (kertain.getKertauksenTila() == KertausmaatinTila.KANJI){ //jos ollaan alussa, näytetään ekassa tekstikentässä, muuten tokassa
             ekaTekstikentta.setText(naytettava);
+        } else if (kertain.getKertauksenTila() == KertausmaatinTila.SUOMI) { //jos ollaan lopussa, vaihdetaan napit osaamisnappeihin
+            vaihdaOsaamisnappeihin();
+            tokaTekstikentta.setText(naytettava);
         } else {
             tokaTekstikentta.setText(naytettava);
         }
         //kertain.seuraavaKerrattava();
     }
     
-    public void naytaTekstiaEkassaKentassa(String naytettava){
-        ekaTekstikentta.setText(naytettava);
+    public void paivitaOsaaminen(Enum osaaminen){
+        kertain.paivitaOsaaminen(osaaminen);
+        kertain.setKertauksenTila(KertausmaatinTila.TYHJA);
+        this.ekaTekstikentta.setText("");
+        this.tokaTekstikentta.setText("");
+        naytaSeuraava();
     }
     
-    public void naytaTekstiaTokassaKentassa(String naytettava){
-        tokaTekstikentta.setText(naytettava);
+    private void vaihdaOsaamisnappeihin() {
+        CardLayout cd = (CardLayout)nappikortit.getLayout();
+        cd.show(nappikortit, "osaamisnapit");
     }
+    
+    //private void paivitaOsaaminen(String )
     
     public File hankiTiedosto(){
         String alkupolku = System.getProperty("user.home") +"\\Documents\\GitHub\\Japanimaatti\\Japanimaatti\\JapanimaatinTiedostot"; //kovakoodausta tavallaan...
@@ -157,4 +166,10 @@ public class Kertauspaneeli extends JPanel{
         }
         return null;
     }
+
+    public void naytaTekstiaEkassaKentassa(String naytettava) {
+        this.ekaTekstikentta.setText(naytettava);
+    }
+
+    
 }

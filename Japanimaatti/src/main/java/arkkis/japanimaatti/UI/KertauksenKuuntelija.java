@@ -4,6 +4,7 @@
  */
 package arkkis.japanimaatti.UI;
 
+import arkkis.japanimaatti.logiikka.OsaamisenTila;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -36,11 +37,11 @@ public class KertauksenKuuntelija implements ActionListener{
             kertauspaneeli.naytaSeuraava();
             //String seuraava = kertauspaneeli.annaMerkki();
         }else if (e.getSource().equals(osasin)){
-            kertauspaneeli.naytaSeuraava(); //näissä väliaikaista copypastea
+            kertauspaneeli.paivitaOsaaminen(OsaamisenTila.OSATTU);
         } else if (e.getSource().equals(melkein)){
-            kertauspaneeli.naytaSeuraava();
+            kertauspaneeli.paivitaOsaaminen(OsaamisenTila.MELKEIN);
         } else if (e.getSource().equals(enOsannut)){
-            kertauspaneeli.naytaSeuraava();
+            kertauspaneeli.paivitaOsaaminen(OsaamisenTila.EI);
         } else if (e.getSource().equals(tunnistenappi)){
             kertauspaneeli.haeKerrattavat();
         }

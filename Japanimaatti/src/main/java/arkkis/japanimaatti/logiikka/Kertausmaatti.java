@@ -11,6 +11,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Random;
 
 /**
@@ -19,7 +20,7 @@ import java.util.Random;
  */
 public class Kertausmaatti {
     private Tiedostonkasittelija kasittelija;
-    private ArrayList<String> tunnisteet;
+    private HashSet<String> tunnisteet;
     private ArrayList<String[]> kerrattavat;
     private TekstiUI ui;
     private Kertauspaneeli paneeli;
@@ -30,7 +31,7 @@ public class Kertausmaatti {
         kasittelija = new Tiedostonkasittelija();
         kasittelija.setFile("JapanimaatinTiedostot/kanjit.txt"); //kovakoodausta...
         kerrattavat = new ArrayList();
-        tunnisteet = new ArrayList();
+        tunnisteet = new HashSet();
         tila = KertausmaatinTila.TYHJA;
     }
     
@@ -56,7 +57,6 @@ public class Kertausmaatti {
             paneeli.naytaTekstiaEkassaKentassa("Mitään kerrattavaa ei valittu!"); //vaatii refaktorointia jotta riippuvuus poistuu...
         } else if (tila == KertausmaatinTila.TYHJA) { //
             moneskoRivi = random.nextInt(kerrattavat.size());
-            //kertaaTama(moneskoRivi);
         }
     }
     
@@ -86,25 +86,21 @@ public class Kertausmaatti {
     }
     
     /**
-     * Metodi lukee tiedoston, etsii sieltä valitulla tunnisteella varustetut rivit ja tallentaa ne ohjelman ajonaikaisene tietorakenteeseen
-     * huom: ei toimi atm!?
+     * Metodi lukee tiedoston, etsii sieltä valitulla tunnisteella varustetut rivit ja tallentaa ne ohjelman ajonaikaiseen tietorakenteeseen
+     * 
      * @param tunniste tällä tunnisteella varustetut rivit tutkitaan
      */
-    
     public void haeKerrattavat(String tunniste){
         Scanner lukija = luoLukija();
         while (lukija.hasNextLine()){
             String rivi = lukija.nextLine();
-            if (rivi.contains(tunniste)){
+            if (rivi.contains(tunniste) || !tunnisteet.contains(tunniste)){ //lisätään kerrattavaksi joko tunnisteella varustetut, tai jos tunniste on huono, niin kaikki
                 String[] rivinSanat = rivi.split(" ");
                 kerrattavat.add(rivinSanat);
             }
         }
-        //kovakoodia testausta varten
-        kerrattavat.add(new String[]{"hund", "dog", "koira", "tunniste1"});
-        kerrattavat.add(new String[]{"katze", "cat", "kissa", "tunniste1"});
-        kerrattavat.add(new String[]{"doobutsu", "animal", "eläin", "tunniste2"});
-        kerrattavat.add(new String[]{"inu", "dog", "koira", "tunniste2"});
+        
+        
     }
     
     /**
@@ -115,10 +111,14 @@ public class Kertausmaatti {
         while (lukija.hasNextLine()){
             String rivi = lukija.nextLine(); //mene nyt sinne uudelle riville
             String[] rivinSanat = rivi.split(" ");
-            lisaaTunniste(rivinSanat[3]);     //tunniste siis aina neljännessä 'sanassa' rivillä
+            tunnisteet.add(rivinSanat[3]);     //tunniste siis aina neljännessä 'sanassa' rivillä
         }
     }
-   
+    
+    /**
+     * palauttaa listan valitussa tiedostossa esiintyvistä tunnisteista
+     * @return string-muotoinen listaus
+     */
     public String getTunnisteet(){
         String palautettava = "";
         for (String tunniste : tunnisteet) {
@@ -127,12 +127,10 @@ public class Kertausmaatti {
         return palautettava;
     }
     
-    public void lisaaTunniste(String tunniste){
-        if (!tunnisteet.contains(tunniste)){
-            tunnisteet.add(tunniste);
-        }
-    }
-    
+    /**
+     * Lukijan luominen eriytetty omaksi metodikseen, jotta try-catch saadaan kapseloitua kivasti
+     * @return tiedoston lukija, tai jos tiedostoa ei ole olemassa, null
+     */
     public Scanner luoLukija(){
         try {
             Scanner lukija = new Scanner(kasittelija.getFile());
@@ -143,8 +141,21 @@ public class Kertausmaatti {
         return null;
     }
     
-    public Enum getTila(){
+    public Enum getKertauksenTila(){
         return tila;
+    }
+    
+    public void setKertauksenTila(Enum tila){
+        this.tila = tila;
+    }
+    
+    /**
+     * Metodi päivittää tiedon siitä, osasiko käyttäjä kerrattavan merkin. Toistaiseksi tieto tallentuu vain ohjelman käytön ajaksi
+     * parannuksia tähän lienee kyllä luvassa.
+     * @param osaaminen Enum joka kertoo, väittikö käyttäjä osaavansa merkin vai eikö
+     */
+    public void paivitaOsaaminen(Enum osaaminen) {
+        kerrattavat.get(moneskoRivi)[4] = osaaminen.toString();
     }
     
 }
