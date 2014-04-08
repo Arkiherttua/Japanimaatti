@@ -17,8 +17,12 @@ public class KertauksenKuuntelija implements ActionListener{
     Kertauspaneeli kertauspaneeli;
     JButton seuraava, osasin, melkein, enOsannut, tunnistenappi;
     
-    public KertauksenKuuntelija(Kertauspaneeli kertauspaneeli, JButton seuraava, JButton osasin, JButton melkein, JButton enOsannut, JButton tunnistenappi){
+    public KertauksenKuuntelija(Kertauspaneeli kertauspaneeli){
         this.kertauspaneeli = kertauspaneeli;
+        
+    }
+    
+    public void setNapit(JButton seuraava, JButton osasin, JButton melkein, JButton enOsannut, JButton tunnistenappi){
         this.seuraava = seuraava;
         this.osasin = osasin;
         this.melkein = melkein;

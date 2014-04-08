@@ -108,6 +108,6 @@ public class TekstiUI {
     private void kertausmaatti() {
         System.out.println("Avasit kertausmaatin. Joskus vielä tästä seuraa kaikkea hienoa");
         System.out.println("Toistaiseksi tämä vain pyörittää kovakoodatun tiedoston sisältöä. Kerran.");
-        kertain.kertaaKaikki();
+        //kertain.kertaaKaikki();
     }
 }

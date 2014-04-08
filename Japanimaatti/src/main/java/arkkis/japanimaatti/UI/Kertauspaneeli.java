@@ -5,20 +5,14 @@
 package arkkis.japanimaatti.UI;
 
 import arkkis.japanimaatti.logiikka.KertausmaatinTila;
-import static arkkis.japanimaatti.logiikka.KertausmaatinTila.*;
 import arkkis.japanimaatti.logiikka.Kertausmaatti;
-import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.io.File;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
 /**
  * Kertauspaneeli muodostaa yhden 'kortin' käyttöliittymään, kortin joka on näkyvissä kun käyttäjä käyttää kertaustoimintoa
@@ -51,20 +45,21 @@ public class Kertauspaneeli extends JPanel{
         this.tekstikortit = new JPanel(new CardLayout());
         this.nappikortit = new JPanel(new CardLayout());
         
+        kuuntelija = new KertauksenKuuntelija(this);
         JButton seuraava = luoSeuraavanappi();
         JPanel osaamisnapit = luoOsaamisnapit();
         JButton tunnistenappi = luoTunnistenappi();
-        kuuntelija = new KertauksenKuuntelija(this, seuraava, (JButton)osaamisnapit.getComponent(0), (JButton)osaamisnapit.getComponent(1), (JButton)osaamisnapit.getComponent(2), tunnistenappi);
+        kuuntelija.setNapit(seuraava, (JButton)osaamisnapit.getComponent(0), (JButton)osaamisnapit.getComponent(1), (JButton)osaamisnapit.getComponent(2), tunnistenappi);
         
-        tekstikortit.add(tunnisteidenValinta);
-        tekstikortit.add(tekstikentat);
+        tekstikortit.add(tunnisteidenValinta, "tunnisteet");
+        tekstikortit.add(tekstikentat, "tekstikentat");
         
-        nappikortit.add(seuraava);
-        nappikortit.add(osaamisnapit);
+        nappikortit.add(tunnistenappi, "tunnisteet");
+        nappikortit.add(seuraava, "seuraava");
+        nappikortit.add(osaamisnapit, "osaamisnapit");
         
         this.add(tekstikortit);
         this.add(nappikortit);
-        
     }
     
     private JPanel luoTekstikentat(){
@@ -81,7 +76,10 @@ public class Kertauspaneeli extends JPanel{
     }
     
     private JPanel luoTunnisteidenValinta(){
-        tunnistelista = new JTextArea("Valitsit tiedoston onnistuneesti. Valitse vielä, millä tunnisteella varustetut merkit haluat kerrata. Valittavat tunnisteet:");
+        kertain.haeTunnisteet();
+        tunnistelista = new JTextArea("Valitsit tiedoston onnistuneesti. \nValitse vielä, millä tunnisteella varustetut \nmerkit haluat kerrata. Valittavat tunnisteet:" +
+            kertain.getTunnisteet());
+        
         tunnistelista.setEditable(false);
         tunnistekentta = new JTextArea("Kirjoita tunniste tähän ja paina valitse-nappia.");
         GridLayout tekstiLayout = new GridLayout(1, 2);
@@ -123,11 +121,17 @@ public class Kertauspaneeli extends JPanel{
     public void haeKerrattavat(){
         String tunniste = tunnistekentta.getText(); //ei turvallista, toistaiseksi maailma hajoaa jos syöttää epäkorrektin tunnisteen
         kertain.haeKerrattavat(tunniste);
+        
+        CardLayout cd = (CardLayout)tekstikortit.getLayout();
+        cd.show(tekstikortit, "tekstikentat");
+        System.out.println("pöö2");
+        CardLayout cd2 = (CardLayout)nappikortit.getLayout();
+        cd2.show(nappikortit, "seuraava");
     }
     
     public void naytaSeuraava(){
         String naytettava = kertain.annaSeuraava();
-        if (kertain.getTila() == KertausmaatinTila.TYHJA){ //jos ollaan alussa, näytetään ekassa tekstikentässä, muuten tokassa
+        if (kertain.getTila() == KertausmaatinTila.KANJI){ //jos ollaan alussa, näytetään ekassa tekstikentässä, muuten tokassa
             ekaTekstikentta.setText(naytettava);
         } else {
             tokaTekstikentta.setText(naytettava);
@@ -143,11 +147,12 @@ public class Kertauspaneeli extends JPanel{
         tokaTekstikentta.setText(naytettava);
     }
     
-    
     public File hankiTiedosto(){
-        JFileChooser valitsija = new JFileChooser();
+        String alkupolku = System.getProperty("user.home") +"\\Documents\\GitHub\\Japanimaatti\\Japanimaatti\\JapanimaatinTiedostot"; //kovakoodausta tavallaan...
+        JFileChooser valitsija = new JFileChooser(alkupolku);
         int valinta = valitsija.showOpenDialog(ui.getFrame());
         if (valinta==JFileChooser.APPROVE_OPTION){
+            
             return valitsija.getSelectedFile();
         }
         return null;

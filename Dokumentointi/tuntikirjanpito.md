@@ -61,3 +61,11 @@ To 3.4
 ======
 Kaksi tuntia kertausmaatin toiminnallisuuden rakentelua.
 Lisäksi pari tuntia dokumentaation rakentelua, googlailua, pohdintaa.
+
+La 5.4
+======
+Noin tunti kertausmaatin rakentelua
+
+Su 6.4
+======
+Reilu tunti suhteellisen tuloksetonta kertausmaatin rakentelua ja debuggausta

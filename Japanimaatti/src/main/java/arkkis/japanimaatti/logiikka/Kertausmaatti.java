@@ -49,24 +49,8 @@ public class Kertausmaatti {
     public void setUI(TekstiUI ui){
         this.ui = ui;
     }
-    
-    /**
-     * Käytöstä pois jäänyt metodi joka luultavasti poistetaan...
-     */
-    
-    public void kertaaKaikki(){
-        //tämä paranee vielä paljon tämä ominaisuus...
-//        Scanner lukija = luoLukija();
-//        while (lukija.hasNextLine()){
-//            String rivi = lukija.nextLine();
-//            String[] rivinSanat = rivi.split(" ");
-//            ui.tulostaJaVaadiEnter(rivinSanat[0]);
-//            ui.tulostaJaVaadiEnter(rivinSanat[1]);
-//            ui.tulostaJaVaadiEnter(rivinSanat[2]);
-//        }
-    }
-    
-    public void seuraavaKerrattava(){
+ 
+    public void arvoSeuraavaKerrattavaRivi(){
         Random random = new Random();
         if (kerrattavat.isEmpty()){
             paneeli.naytaTekstiaEkassaKentassa("Mitään kerrattavaa ei valittu!"); //vaatii refaktorointia jotta riippuvuus poistuu...
@@ -96,10 +80,16 @@ public class Kertausmaatti {
      */
     public String annaSeuraava(){
         if (tila == KertausmaatinTila.TYHJA){
-            seuraavaKerrattava();
+            arvoSeuraavaKerrattavaRivi();
         }
         return kertaaTama(moneskoRivi);
     }
+    
+    /**
+     * Metodi lukee tiedoston, etsii sieltä valitulla tunnisteella varustetut rivit ja tallentaa ne ohjelman ajonaikaisene tietorakenteeseen
+     * huom: ei toimi atm!?
+     * @param tunniste tällä tunnisteella varustetut rivit tutkitaan
+     */
     
     public void haeKerrattavat(String tunniste){
         Scanner lukija = luoLukija();
@@ -110,6 +100,11 @@ public class Kertausmaatti {
                 kerrattavat.add(rivinSanat);
             }
         }
+        //kovakoodia testausta varten
+        kerrattavat.add(new String[]{"hund", "dog", "koira", "tunniste1"});
+        kerrattavat.add(new String[]{"katze", "cat", "kissa", "tunniste1"});
+        kerrattavat.add(new String[]{"doobutsu", "animal", "eläin", "tunniste2"});
+        kerrattavat.add(new String[]{"inu", "dog", "koira", "tunniste2"});
     }
     
     /**
@@ -127,7 +122,7 @@ public class Kertausmaatti {
     public String getTunnisteet(){
         String palautettava = "";
         for (String tunniste : tunnisteet) {
-            palautettava += tunniste + " ";
+            palautettava += tunniste + "\n";
         }
         return palautettava;
     }
@@ -152,7 +147,4 @@ public class Kertausmaatti {
         return tila;
     }
     
-    public void valitseKerrattavat(){
-        //tähän hieno metodi jossain vaiheessa
-    }
 }
