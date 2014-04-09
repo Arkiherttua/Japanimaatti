@@ -59,7 +59,12 @@ public class Kertausmaatti {
             moneskoRivi = random.nextInt(kerrattavat.size());
         }
     }
-    
+    /**
+     * Varsin oleellinen metodi, joka palauttaa merkin joka pitää kys. hetkellä tulostaa
+     * sekä päivittää kertausmaatin tilan tätä vastaavaksi
+     * @param index rivi, jonka sisältöä käsitellään
+     * @return näytettävä teksti, eli merkki/merkin ääntämys/merkin suomennos
+     */
     public String kertaaTama(int index){
         String palautettava = "";
         if (tila==KertausmaatinTila.TYHJA) {
@@ -91,13 +96,22 @@ public class Kertausmaatti {
      * @param tunniste tällä tunnisteella varustetut rivit tutkitaan
      */
     public void haeKerrattavat(String tunniste){
-        Scanner lukija = luoLukija();
-        while (lukija.hasNextLine()){
-            String rivi = lukija.nextLine();
+//        Scanner lukija = luoLukija();
+//        while (lukija.hasNextLine()){
+//            String rivi = lukija.nextLine();
+//            if (rivi.contains(tunniste) || !tunnisteet.contains(tunniste)){ //lisätään kerrattavaksi joko tunnisteella varustetut, tai jos tunniste on huono, niin kaikki
+//                String[] rivinSanat = rivi.split(" ");
+//                kerrattavat.add(rivinSanat);
+//            }
+//        }
+        kasittelija.luoLukija();
+        String rivi = kasittelija.lueTiedostoRiviKerrallaan();
+        while (!rivi.equals("TIEDOSTON LOPPU")){
             if (rivi.contains(tunniste) || !tunnisteet.contains(tunniste)){ //lisätään kerrattavaksi joko tunnisteella varustetut, tai jos tunniste on huono, niin kaikki
                 String[] rivinSanat = rivi.split(" ");
                 kerrattavat.add(rivinSanat);
             }
+            rivi = kasittelija.lueTiedostoRiviKerrallaan();
         }
         
         
@@ -107,11 +121,17 @@ public class Kertausmaatti {
      * Kun kertaus aloitetaan, kutsutaan tätä metodia joka käy läpi tiedoston ja tekee listan siinä esiintyvistä tunnisteista
      */
     public void haeTunnisteet(){
-        Scanner lukija = luoLukija();
-        while (lukija.hasNextLine()){
-            String rivi = lukija.nextLine(); //mene nyt sinne uudelle riville
+//        Scanner lukija = luoLukija();
+//        while (lukija.hasNextLine()){
+//            String rivi = lukija.nextLine(); //mene nyt sinne uudelle riville
+//            String[] rivinSanat = rivi.split(" ");
+//            tunnisteet.add(rivinSanat[3]);     //tunniste siis aina neljännessä 'sanassa' rivillä
+//        }
+        String rivi = kasittelija.lueTiedostoRiviKerrallaan();
+        while (!rivi.equals("TIEDOSTON LOPPU")){
             String[] rivinSanat = rivi.split(" ");
-            tunnisteet.add(rivinSanat[3]);     //tunniste siis aina neljännessä 'sanassa' rivillä
+            tunnisteet.add(rivinSanat[3]);
+            rivi = kasittelija.lueTiedostoRiviKerrallaan();
         }
     }
     

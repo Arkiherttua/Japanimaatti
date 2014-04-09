@@ -101,27 +101,35 @@ public class GraafinenUI implements Runnable{
         return nappi;
     }
     
-    public JPanel luoValikkopaneeli(){
-        return null;
-    }
-    
+    /**
+     * Metodi asettaa näkyviin kertauspaneelin, ja valmistelee ohjelman sitä varten myös
+     * mm. laittamalla käyttäjän valitsemaan tiedoston kertausta varten
+     */
     public void kertausmaatti(){
         ajastinmaatti.tallennaTiedot(); //tallenna tiedot aina, kun siirretään korttiin joka ei ole ajastin
         File kertaustiedosto = kertauspaneeli.hankiTiedosto();
         kertausmaatti.setTiedosto(kertaustiedosto);
+        kertausmaatti.haeTunnisteet();
+        kertauspaneeli.paivitaTunnistekentta();
         CardLayout cd = (CardLayout)cards.getLayout();
         cd.show(cards, "kertain");
     }
     
+    /**
+     * Metodi asettaa näkyviin ajastinpaneelin
+     */
     public void ajastinmaatti(){
         ajastinpaneeli.paivita();
         CardLayout cd = (CardLayout)cards.getLayout();   
         cd.show(cards, "ajastin");
     }
     
+    /**
+     * Metodi asettaa näkyviin tilastopaneelin
+     */
     public void tilastomaatti(){
         tilastot.paivita();
-        ajastinmaatti.tallennaTiedot(); //ks seuraava kommenttti ylöspäin mennessä
+        ajastinmaatti.tallennaTiedot(); //tallenna tiedot aina, kun siirretään korttiin joka ei ole ajastin
         CardLayout cd = (CardLayout)cards.getLayout();
         cd.show(cards, "tilastot");
     }

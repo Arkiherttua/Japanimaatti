@@ -124,10 +124,13 @@ public class Kertauspaneeli extends JPanel{
         
         CardLayout cd = (CardLayout)tekstikortit.getLayout();
         cd.show(tekstikortit, "tekstikentat");
-        CardLayout cd2 = (CardLayout)nappikortit.getLayout();
-        cd2.show(nappikortit, "seuraava");
+        vaihdaSeuraavanappiin();
     }
-    
+    /**
+     * Olennainen metodi, jota kertauksen kuuntelija kutsuu kun seuraava-nappia painetaan.
+     * Näyttää siis kertausmaatilta saamansa tekstin oikeassa ruudussa, ja tarvittaessa vaihtaa
+     * seuraava-napin osaamisnappeihin.
+     */
     public void naytaSeuraava(){
         String naytettava = kertain.annaSeuraava();
         if (kertain.getKertauksenTila() == KertausmaatinTila.KANJI){ //jos ollaan alussa, näytetään ekassa tekstikentässä, muuten tokassa
@@ -141,12 +144,24 @@ public class Kertauspaneeli extends JPanel{
         //kertain.seuraavaKerrattava();
     }
     
+    /**
+     * Metodia kutsuu kertauksen kuuntelija, jolta saadun tiedon mukaan muokataan
+     * kyseessä olevan merkin osaamistasoa. Metodi myös valmistelee kertauspaneelin
+     * seuraavan merkin kertaamista varten.
+     * @param osaaminen enum, joka kertoo, mitä nappia käyttäjä painoi eli osaako käyttäjä kerrattavan asian
+     */
     public void paivitaOsaaminen(Enum osaaminen){
         kertain.paivitaOsaaminen(osaaminen);
         kertain.setKertauksenTila(KertausmaatinTila.TYHJA);
         this.ekaTekstikentta.setText("");
         this.tokaTekstikentta.setText("");
         naytaSeuraava();
+        vaihdaSeuraavanappiin();
+    }
+    
+    private void vaihdaSeuraavanappiin(){
+        CardLayout cd = (CardLayout)nappikortit.getLayout();
+        cd.show(nappikortit, "seuraava");
     }
     
     private void vaihdaOsaamisnappeihin() {
@@ -154,14 +169,15 @@ public class Kertauspaneeli extends JPanel{
         cd.show(nappikortit, "osaamisnapit");
     }
     
-    //private void paivitaOsaaminen(String )
-    
+    /**
+     * Metodi luo tiedostonvalitsimen, jolla käyttäjä valitsee tiedoston, jossa kerrattavat asiat ovat
+     * @return valittua tiedostoa vastaava File-olio
+     */
     public File hankiTiedosto(){
         String alkupolku = System.getProperty("user.home") +"\\Documents\\GitHub\\Japanimaatti\\Japanimaatti\\JapanimaatinTiedostot"; //kovakoodausta tavallaan...
         JFileChooser valitsija = new JFileChooser(alkupolku);
         int valinta = valitsija.showOpenDialog(ui.getFrame());
         if (valinta==JFileChooser.APPROVE_OPTION){
-            
             return valitsija.getSelectedFile();
         }
         return null;
@@ -169,6 +185,10 @@ public class Kertauspaneeli extends JPanel{
 
     public void naytaTekstiaEkassaKentassa(String naytettava) {
         this.ekaTekstikentta.setText(naytettava);
+    }
+
+    void paivitaTunnistekentta() {
+        tunnistelista.setText("Valitsit tiedoston onnistuneesti. \nValitse vielä, millä tunnisteella varustetut \nmerkit haluat kerrata. Valittavat tunnisteet:" + kertain.getTunnisteet());
     }
 
     

@@ -85,12 +85,12 @@ public class AjastimenTiedot {
     public void LueTiedotTiedostosta(){
         String menossaMappiin = "";
         try {
-            menossaMappiin = kasittelija.lueTiedosto();
+            menossaMappiin = kasittelija.lueTiedostoSanaKerrallaan();
         } catch (NullPointerException e){
             System.out.println("URPO!"); //tähän jotain fiksua joskus
         }
         
-        String luettu = kasittelija.lueTiedosto();
+        String luettu = kasittelija.lueTiedostoSanaKerrallaan();
         
         while (!luettu.equals("TIEDOSTON LOPPU")){
             try {
@@ -99,7 +99,7 @@ public class AjastimenTiedot {
             } catch (Exception e){
                 menossaMappiin = luettu;
             }
-            luettu = kasittelija.lueTiedosto();
+            luettu = kasittelija.lueTiedostoSanaKerrallaan();
         }
     }
     

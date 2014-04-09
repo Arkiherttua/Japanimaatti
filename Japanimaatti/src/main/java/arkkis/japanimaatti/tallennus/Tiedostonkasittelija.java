@@ -2,8 +2,11 @@
 package arkkis.japanimaatti.tallennus;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * 
@@ -41,7 +44,7 @@ public class Tiedostonkasittelija {
      * @throws NullPointerException jos tiedostoa ei ole, ohjelma heittää tällaisen
      */
     
-    public String lueTiedosto() throws NullPointerException{
+    public String lueTiedostoSanaKerrallaan() throws NullPointerException{
 
         if (lukija.hasNext()){
             return lukija.next();
@@ -50,6 +53,17 @@ public class Tiedostonkasittelija {
         }
        
     }
+    
+    public String lueTiedostoRiviKerrallaan() throws NullPointerException{
+
+        if (lukija.hasNextLine()){
+            return lukija.nextLine();
+        } else {
+            return "TIEDOSTON LOPPU";
+        }
+       
+    }
+    
     
     public File getFile(){
         return tiedosto;
@@ -80,5 +94,13 @@ public class Tiedostonkasittelija {
             return false;
         }
         return true;
+    }
+    
+    public void luoLukija(){
+        try {
+            lukija = new Scanner(tiedosto);
+        } catch (FileNotFoundException ex) {
+            System.out.println("Tiedostoa ei löydy!");
+        }
     }
 }
