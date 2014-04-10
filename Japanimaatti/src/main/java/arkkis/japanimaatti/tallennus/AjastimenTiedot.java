@@ -45,7 +45,7 @@ public class AjastimenTiedot {
         String palautettava = "";
         palautettava += "Tässä tilastot opiskelustasi: \n";
         for (String avain: opiskelut.keySet()) {
-            palautettava += avain + " " + opiskelut.get(avain) + " minuuttia \n";
+            palautettava += avain + " " + opiskelut.get(avain) + " minuuttia\n";
         }
         return palautettava;
     }
@@ -57,7 +57,7 @@ public class AjastimenTiedot {
     public String getOpiskellutAiheet(){
         String palautettava = "";
         for (String avain : opiskelut.keySet()) {
-            palautettava += avain + "   ";
+            palautettava += avain + " ";
         }
         //palautettava = palautettava.substring(0, palautettava.length()-3);
         return palautettava;

@@ -50,7 +50,11 @@ public class Kertausmaatti {
     public void setUI(TekstiUI ui){
         this.ui = ui;
     }
- 
+    
+    /**
+     * Metodi arpoo, monenneltako riviltä kerrattavat-listaa kerrataan seuraava merkki
+     * ja päivittää luokkamuuttujaa moneskoRivi, joka sisältää tuon tiedon
+     */
     public void arvoSeuraavaKerrattavaRivi(){
         Random random = new Random();
         if (kerrattavat.isEmpty()){

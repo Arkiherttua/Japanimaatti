@@ -23,7 +23,7 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 /**
- * Kayttoliittymäluokkien 'pääluokka'
+ * Käyttöliittymäluokkien 'pääluokka', joka hallinnoi kokonaisuutta
  * 
  */
 public class GraafinenUI implements Runnable{
@@ -31,7 +31,7 @@ public class GraafinenUI implements Runnable{
     private Container contentPane;
     private Kertauspaneeli kertauspaneeli;
     private Ajastinpaneeli ajastinpaneeli;
-    private JPanel cards;
+    private JPanel paneelikortit;
     private Kertausmaatti kertausmaatti;
     private Ajastinmaatti ajastinmaatti;
     private Tilastopaneeli tilastot;
@@ -39,8 +39,6 @@ public class GraafinenUI implements Runnable{
     public GraafinenUI(Kertausmaatti kertain, Ajastinmaatti ajastin){
         this.frame = new JFrame("Japanimaatti");
         this.contentPane = frame.getContentPane();
-        //this.ajastinpaneeli = new Ajastinpaneeli(this); //nämä turhia?
-        //this.kertauspaneeli = new Kertauspaneeli(this);
         this.kertausmaatti = kertain;
         this.ajastinmaatti = ajastin;
     }
@@ -49,14 +47,35 @@ public class GraafinenUI implements Runnable{
     public void run() {
         frame.setPreferredSize(new Dimension(700,400));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        
         luoKomponentit(frame.getContentPane());
-        
         frame.setVisible(true);
         frame.pack();
     }
 
     private void luoKomponentit(Container contentPane) {
+        JPanel menu = luoValikko();
+        contentPane.add(menu, BorderLayout.WEST);
+                
+        paneelikortit = new JPanel(new CardLayout());
+        contentPane.add(paneelikortit);
+
+        this.tilastot = new Tilastopaneeli(this);
+        
+        JPanel alku = new JPanel();
+        this.kertauspaneeli= new Kertauspaneeli(this.kertausmaatti, this);
+        this.ajastinpaneeli= new Ajastinpaneeli(this.ajastinmaatti, this);
+        
+        paneelikortit.add(alku, "alku");
+        paneelikortit.add(tilastot, "tilastot");
+        paneelikortit.add(kertauspaneeli, "kertain");
+        paneelikortit.add(ajastinpaneeli, "ajastin");
+        
+    }
+    /**
+     * Metodi luo JPanel-olion joka on ohjelman koko ajan näkyvillä oleva valikko
+     * @return JPanel jossa halutut napit ja otsikkokenttä
+     */
+    private JPanel luoValikko(){
         JTextField otsikko = new JTextField("Valikko");
         otsikko.setEditable(false);
         JButton kertausnappi = new JButton("Kertaa");
@@ -71,48 +90,26 @@ public class GraafinenUI implements Runnable{
         menu.add(ajastinnappi);
         menu.add(tilastonappi);
         
-        contentPane.add(menu, BorderLayout.WEST);
-        
         Kuuntelija k = new Kuuntelija(this, kertausnappi, ajastinnappi, tilastonappi);
         kertausnappi.addActionListener(k);
         ajastinnappi.addActionListener(k);
         tilastonappi.addActionListener(k);
-        
-        cards = new JPanel(new CardLayout());
-        contentPane.add(cards);
+        return menu;
+    }
 
-        this.tilastot = new Tilastopaneeli(this);
-        //tilastot.add(new JTextField("Ei vielä tuettu"));
-        
-        JPanel alku = new JPanel();
-        Kertauspaneeli kertain = new Kertauspaneeli(this.kertausmaatti, this);
-        Ajastinpaneeli ajastin = new Ajastinpaneeli(this.ajastinmaatti, this);
-        this.ajastinpaneeli = ajastin;
-        this.kertauspaneeli = kertain;
-        cards.add(alku, "alku");
-        cards.add(tilastot, "tilastot");
-        cards.add(kertain, "kertain");
-        cards.add(ajastin, "ajastin");
-        
-    }
-    
-    public JButton luoNappi(String teksti){
-        JButton nappi = new JButton(teksti);
-        return nappi;
-    }
     
     /**
      * Metodi asettaa näkyviin kertauspaneelin, ja valmistelee ohjelman sitä varten myös
      * mm. laittamalla käyttäjän valitsemaan tiedoston kertausta varten
      */
     public void kertausmaatti(){
-        ajastinmaatti.tallennaTiedot(); //tallenna tiedot aina, kun siirretään korttiin joka ei ole ajastin
+        ajastinmaatti.tallennaTiedot(); //tallenna tiedot aina, kun siirrytään korttiin joka ei ole ajastin
         File kertaustiedosto = kertauspaneeli.hankiTiedosto("Valitse tiedosto");
         kertausmaatti.setTiedosto(kertaustiedosto);
         kertausmaatti.haeTunnisteet();
         kertauspaneeli.paivitaTunnistekentta();
-        CardLayout cd = (CardLayout)cards.getLayout();
-        cd.show(cards, "kertain");
+        CardLayout cd = (CardLayout)paneelikortit.getLayout();
+        cd.show(paneelikortit, "kertain");
     }
     
     /**
@@ -120,8 +117,8 @@ public class GraafinenUI implements Runnable{
      */
     public void ajastinmaatti(){
         ajastinpaneeli.paivita();
-        CardLayout cd = (CardLayout)cards.getLayout();   
-        cd.show(cards, "ajastin");
+        CardLayout cd = (CardLayout)paneelikortit.getLayout();   
+        cd.show(paneelikortit, "ajastin");
     }
     
     /**
@@ -130,8 +127,8 @@ public class GraafinenUI implements Runnable{
     public void tilastomaatti(){
         tilastot.paivita();
         ajastinmaatti.tallennaTiedot(); //tallenna tiedot aina, kun siirretään korttiin joka ei ole ajastin
-        CardLayout cd = (CardLayout)cards.getLayout();
-        cd.show(cards, "tilastot");
+        CardLayout cd = (CardLayout)paneelikortit.getLayout();
+        cd.show(paneelikortit, "tilastot");
     }
     
     public JFrame getFrame(){

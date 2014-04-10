@@ -57,6 +57,22 @@ public class AjastimenTiedotTest {
     }
     
     @Test
+    public void getOpiskellutAiheetToimii(){
+        kirjoitaOikeanmuotoinenSyote();
+        tiedot.LueTiedotTiedostosta();
+        
+        assertEquals("opiskelu1 opiskelu2 ", tiedot.getOpiskellutAiheet());
+    }
+    
+    @Test
+    public void getOpiskellutAsiatJaOpiskelunKestoToimii(){
+        kirjoitaOikeanmuotoinenSyote();
+        tiedot.LueTiedotTiedostosta();
+        
+        assertEquals("Tässä tilastot opiskelustasi: \nopiskelu1 10 minuuttia\nopiskelu2 20 minuuttia\n", tiedot.getOpiskellutAsiatJaOpiskelunKesto());
+    }
+    
+    @Test
     public void TallentaminenToimiiKunKasvatetaanOlemassaOlevaa(){
         kirjoitaOikeanmuotoinenSyote();
         tiedot.LueTiedotTiedostosta();

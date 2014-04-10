@@ -25,7 +25,7 @@ public class Ajastinmaatti {
         ajastimenTiedot.LueTiedotTiedostosta();
     }
     
-    public void setUI(TekstiUI UI){ //jossain vaiheessa ui:sta tullee rajapinta ei luokka
+    public void setUI(TekstiUI UI){
         this.UI = UI;
     }
     

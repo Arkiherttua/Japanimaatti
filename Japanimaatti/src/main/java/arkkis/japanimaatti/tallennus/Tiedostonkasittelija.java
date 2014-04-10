@@ -54,6 +54,11 @@ public class Tiedostonkasittelija {
        
     }
     
+    /**
+     * Metodi lukee tiedostoa, yksi rivi per jokainen kutsu
+     * @return palauttaa tiedostosta luetun rivin stringinä tai TIEDOSTON LOPPU jos ollaan lopussa
+     * @throws NullPointerException jos tiedostoa ei ole, ohjelma heittää tällaisen
+     */
     public String lueTiedostoRiviKerrallaan() throws NullPointerException{
 
         if (lukija.hasNextLine()){

@@ -58,6 +58,20 @@ public class TiedostonkasittelijaTest {
         assertEquals(tiedosto, k.getFile());
     }
     
+    @Test
+    public void setFileToimiiKunTiedostoEiOlemassa() {
+        Tiedostonkasittelija k = new Tiedostonkasittelija();
+        File nulltiedosto = null;
+        assertFalse(k.setFile(nulltiedosto));
+    }
+    
+     @Test
+    public void setFileStringparametrillaToimiiKunTiedostoEiOlemassa() {
+        Tiedostonkasittelija k = new Tiedostonkasittelija();
+        String eiOleTiedostonNimi = "blaablaablaa";
+        assertFalse(k.setFile(eiOleTiedostonNimi));
+    }
+    
 //    @Test
 //    public void tiedostoonTallentaminenToimii() {
 //        Tiedostonkasittelija k = new Tiedostonkasittelija();

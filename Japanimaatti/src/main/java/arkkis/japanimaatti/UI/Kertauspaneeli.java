@@ -117,10 +117,13 @@ public class Kertauspaneeli extends JPanel{
         return tunnistenappi;
     }
     
+    /**
+     * Kutsuu kertausmaatin haeTunnisteet-metodia tekstikentän tekstillä
+     * ja vaihtaa näkyviin kertauksen vaatimat seuraava-napin ja tekstiknettakortin
+     */
     public void haeKerrattavat(){
         String tunniste = tunnistekentta.getText();
         kertain.haeKerrattavat(tunniste);
-        
         CardLayout cd = (CardLayout)tekstikortit.getLayout();
         cd.show(tekstikortit, "tekstikentat");
         vaihdaSeuraavanappiin();
