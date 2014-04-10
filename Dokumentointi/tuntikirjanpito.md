@@ -69,3 +69,15 @@ Noin tunti kertausmaatin rakentelua
 Su 6.4
 ======
 Reilu tunti suhteellisen tuloksetonta kertausmaatin rakentelua ja debuggausta
+
+Ti 8.4
+======
+1,5 tuntia kertausmaatin kanssa tappelua. Nyt maatti osaa näyttää ekan kerrattavista merkeistä, mutta ei löydä tunnisteita eikä kertaaminen jatku...
+
+Ke 9.4
+======
+Reilu kaksi tuntia kertausmaatin hidasta säätöä. Nyt homma toimii. Enää bugit pitäisi saada pois ja laittaa maatti oikeasti tallentamaan, onko käyttäjä väittänyt osaavansa merkit
+
+To 10.4
+=======
+Kolmisen tuntia (josta osa kului ihan muuhun) kertausmaatin säätöä (mm. nyt pitäisi kaatuilla vähemmän), refaktorointia yms siivoamista koko projektissa, dokumentaatiota jne
