@@ -29,7 +29,7 @@ public class Kertausmaatti {
     
     public Kertausmaatti(){
         kasittelija = new Tiedostonkasittelija();
-        kasittelija.setFile("JapanimaatinTiedostot/kanjit.txt"); //kovakoodausta...
+        //kasittelija.setFile("JapanimaatinTiedostot/kanjit.txt"); //kovakoodausta...
         kerrattavat = new ArrayList();
         tunnisteet = new HashSet();
         tila = KertausmaatinTila.TYHJA;
@@ -79,6 +79,24 @@ public class Kertausmaatti {
         }
         return palautettava;
     }
+    /**
+     * Metodi tarkistaa, soveltuuko annettu tiedosto kertaamiseen, eli onko se muotoiltu oikein,
+     * sillä väärin muotoiltu tiedosto hajottaisi kertausmaatin
+     * @param tiedosto viite tiedostoon, jonka muotoilua tutkitaan
+     * @return true jos tiedosto on kelvollinen, muuten false
+     */
+    public boolean onkoTiedostoOikeanmuotoinen(File tiedosto){
+        kasittelija.setFile(tiedosto);
+        String luettu = kasittelija.lueTiedostoRiviKerrallaan();
+        while (!luettu.equals("TIEDOSTON LOPPU")){
+            String[] rivinSanat = luettu.split(" ");
+            if (!(rivinSanat.length == 4 || rivinSanat.length == 5)){ 
+                return false; //jos rivillä väärä määrä sanoja, return false
+            }
+            luettu = kasittelija.lueTiedostoRiviKerrallaan();
+        }
+        return true;
+    }
     
     /**
      * KertauksenKuuntelija kutsuu tätä metodia, joka tarkistaa, missä vaiheessa kertausta mennään ja asettaa seuraavan asian näkyviin
@@ -96,14 +114,6 @@ public class Kertausmaatti {
      * @param tunniste tällä tunnisteella varustetut rivit tutkitaan
      */
     public void haeKerrattavat(String tunniste){
-//        Scanner lukija = luoLukija();
-//        while (lukija.hasNextLine()){
-//            String rivi = lukija.nextLine();
-//            if (rivi.contains(tunniste) || !tunnisteet.contains(tunniste)){ //lisätään kerrattavaksi joko tunnisteella varustetut, tai jos tunniste on huono, niin kaikki
-//                String[] rivinSanat = rivi.split(" ");
-//                kerrattavat.add(rivinSanat);
-//            }
-//        }
         kasittelija.luoLukija();
         String rivi = kasittelija.lueTiedostoRiviKerrallaan();
         while (!rivi.equals("TIEDOSTON LOPPU")){
@@ -121,12 +131,7 @@ public class Kertausmaatti {
      * Kun kertaus aloitetaan, kutsutaan tätä metodia joka käy läpi tiedoston ja tekee listan siinä esiintyvistä tunnisteista
      */
     public void haeTunnisteet(){
-//        Scanner lukija = luoLukija();
-//        while (lukija.hasNextLine()){
-//            String rivi = lukija.nextLine(); //mene nyt sinne uudelle riville
-//            String[] rivinSanat = rivi.split(" ");
-//            tunnisteet.add(rivinSanat[3]);     //tunniste siis aina neljännessä 'sanassa' rivillä
-//        }
+
         String rivi = kasittelija.lueTiedostoRiviKerrallaan();
         while (!rivi.equals("TIEDOSTON LOPPU")){
             String[] rivinSanat = rivi.split(" ");
@@ -142,23 +147,12 @@ public class Kertausmaatti {
     public String getTunnisteet(){
         String palautettava = "";
         for (String tunniste : tunnisteet) {
-            palautettava += tunniste + "\n";
+            palautettava += tunniste + " ";
         }
         return palautettava;
     }
-    
-    /**
-     * Lukijan luominen eriytetty omaksi metodikseen, jotta try-catch saadaan kapseloitua kivasti
-     * @return tiedoston lukija, tai jos tiedostoa ei ole olemassa, null
-     */
-    public Scanner luoLukija(){
-        try {
-            Scanner lukija = new Scanner(kasittelija.getFile());
-            return lukija;
-        } catch (Exception e){
-            System.out.println("Tiedostoa ei löydy!");
-        }
-        return null;
+    public ArrayList<String[]> getKerrattavat(){
+        return this.kerrattavat;
     }
     
     public Enum getKertauksenTila(){

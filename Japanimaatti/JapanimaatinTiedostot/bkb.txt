@@ -1,0 +1,36 @@
+﻿出	シュツ, シュッ	でーる, だーす	tulla/mennä ulos	17
+入	ニュウ	はいーる, いーれる	mennä sisään, laittaa sisään	17
+乗	ジョウ	のーる, のーせる	matkustaa	17
+降	コウ	おーりる, ふーる, おーろす		laskeutua	17
+着	チャク	つーく, きーる	saapua, saavuttaa, pukea	17
+渡	ト	わたーる, わたーす	ristetä	17
+通	シウ	とおーる, かよーう, とおーす	pass, commute (?)	17
+走	ソウ	はしーる	juosta	17
+歩	ホ, ポ	あるーく	kävellä	17
+止	シ	とーまる, とーめる	pysähtyä	17
+動	ドウ	うごーく, うごーかす	liikkua	17
+働	ドウ	はたらーく	työskennellä	17
+右	ウ, ユウ	みぎ	oikea	18
+左	サ	ひだり	vasen	18
+東	トウ	ひがし	itä	18
+西	セイ, サイ	にし	länsi	18
+北	ホク, ホ	きた	pohjoinen	18
+南	ナン	みなみ	etelä	18
+外	ガイ, ゲ	そと	ulko-, ulkona, muu, ulkomaa-	18
+内	ナイ	うち	sisä-, sisällä, sisempi	18
+部	ブ	へ	osasto, osa, klubi(club)	18
+駅	エキ	-	asema	18
+社	シャ, ージャ	-	shintopyhäkkö, yritys, yhdistys	18
+院	イン	-	instituutio, laitos	18
+地	ジ, チ	-	maa, perusta	19
+鉄	テツ	-	rauta	19
+工	コウ	-	taito, rakennus	19
+場	ジョウ	ば	paikka (myös: scene)	19
+図	ズ, ト	-	kaava, laite	19
+館	カン	-	kartano, halli	19
+公	コウ	-	julkinen, virallinen	19
+園	エン	-	puutarha		19
+住	ジュウ	すーむ	asua			19
+所	ショ, ージョ	ところ	paikka, that which(?)	19
+番	バン	-	numero, järjestys	19
+号	ゴウ	-	nimeäminen, järjestys	19

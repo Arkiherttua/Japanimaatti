@@ -10,6 +10,7 @@ import java.awt.CardLayout;
 import java.awt.GridLayout;
 import java.io.File;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -76,9 +77,7 @@ public class Kertauspaneeli extends JPanel{
     }
     
     private JPanel luoTunnisteidenValinta(){
-        kertain.haeTunnisteet();
-        tunnistelista = new JTextArea("Valitsit tiedoston onnistuneesti. \nValitse vielä, millä tunnisteella varustetut \nmerkit haluat kerrata. Valittavat tunnisteet:" +
-            kertain.getTunnisteet());
+        tunnistelista = new JTextArea("");
         
         tunnistelista.setEditable(false);
         tunnistekentta = new JTextArea("Kirjoita tunniste tähän ja paina valitse-nappia.");
@@ -173,22 +172,28 @@ public class Kertauspaneeli extends JPanel{
      * Metodi luo tiedostonvalitsimen, jolla käyttäjä valitsee tiedoston, jossa kerrattavat asiat ovat
      * @return valittua tiedostoa vastaava File-olio
      */
-    public File hankiTiedosto(){
+    public File hankiTiedosto(String otsikko){
         String alkupolku = System.getProperty("user.home") +"\\Documents\\GitHub\\Japanimaatti\\Japanimaatti\\JapanimaatinTiedostot"; //kovakoodausta tavallaan...
         JFileChooser valitsija = new JFileChooser(alkupolku);
+        valitsija.setDialogTitle(otsikko);
         int valinta = valitsija.showOpenDialog(ui.getFrame());
         if (valinta==JFileChooser.APPROVE_OPTION){
-            return valitsija.getSelectedFile();
+            if (kertain.onkoTiedostoOikeanmuotoinen(valitsija.getSelectedFile())){
+                return valitsija.getSelectedFile();
+            } else {
+                return hankiTiedosto("Valitse tiedosto, joka on muotoiltu vastaamaan ohjelman vaatimuksia!");
+            }
         }
         return null;
     }
+    
 
     public void naytaTekstiaEkassaKentassa(String naytettava) {
         this.ekaTekstikentta.setText(naytettava);
     }
 
     void paivitaTunnistekentta() {
-        tunnistelista.setText("Valitsit tiedoston onnistuneesti. \nValitse vielä, millä tunnisteella varustetut \nmerkit haluat kerrata. Valittavat tunnisteet:" + kertain.getTunnisteet());
+        tunnistelista.setText("Valitsit tiedoston onnistuneesti. \nValitse vielä, millä tunnisteella varustetut \nmerkit haluat kerrata. Valittavat tunnisteet:\n" + kertain.getTunnisteet());
     }
 
     
