@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package arkkis.japanimaatti.logiikka;
 
 import arkkis.japanimaatti.UI.Kertauspaneeli;
@@ -9,8 +5,6 @@ import arkkis.japanimaatti.UI.TekstiUI;
 import arkkis.japanimaatti.tallennus.Tiedostonkasittelija;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Random;
 
@@ -135,7 +129,6 @@ public class Kertausmaatti {
      * Kun kertaus aloitetaan, kutsutaan tätä metodia joka käy läpi tiedoston ja tekee listan siinä esiintyvistä tunnisteista
      */
     public void haeTunnisteet(){
-
         String rivi = kasittelija.lueTiedostoRiviKerrallaan();
         while (!rivi.equals("TIEDOSTON LOPPU")){
             String[] rivinSanat = rivi.split(" ");
@@ -174,6 +167,14 @@ public class Kertausmaatti {
      */
     public void paivitaOsaaminen(Enum osaaminen) {
         kerrattavat.get(moneskoRivi)[4] = osaaminen.toString();
+    }
+    
+    /**
+     * Metodi laittaa tiedostonkäsittelijän tallentamaan kerrattavat-listan
+     * sisällön tiedostoon, eli osaamistiedot päivittyvät
+     */
+    public void tallennaTiedostoon(){
+        kasittelija.muokkaaTiedostonTiettyjaRiveja(kerrattavat);
     }
     
 }

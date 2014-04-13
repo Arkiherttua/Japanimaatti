@@ -81,3 +81,11 @@ Reilu kaksi tuntia kertausmaatin hidasta säätöä. Nyt homma toimii. Enää bugit pi
 To 10.4
 =======
 Kolmisen tuntia (josta osa kului ihan muuhun) kertausmaatin säätöä (mm. nyt pitäisi kaatuilla vähemmän), refaktorointia yms siivoamista koko projektissa, dokumentaatiota jne
+
+Pe 11.4
+=======
+Noin puoli tuntia katselmoitavan koodin ihmettelyä
+
+Su 13.4
+=======
+Jälleen noin puoli tuntia koodikatselmoinnin parissa, luin lisää koodia, kirjoitin palautteen ja laitoin GitHubiin.

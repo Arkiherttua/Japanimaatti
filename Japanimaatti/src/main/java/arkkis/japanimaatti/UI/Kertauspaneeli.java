@@ -12,6 +12,7 @@ import java.io.File;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
@@ -184,8 +185,11 @@ public class Kertauspaneeli extends JPanel{
             if (kertain.onkoTiedostoOikeanmuotoinen(valitsija.getSelectedFile())){
                 return valitsija.getSelectedFile();
             } else {
+                JOptionPane.showMessageDialog(this, "Valitse tiedosto, joka on muotoiltu vastaamaan ohjelman vaatimuksia!");
                 return hankiTiedosto("Valitse tiedosto, joka on muotoiltu vastaamaan ohjelman vaatimuksia!");
             }
+        } else if (valinta== JFileChooser.CANCEL_OPTION){
+            ui.alkupaneeli(); //jos tiedostoa ei valittu, palataan ohjelman aloistutilaan
         }
         return null;
     }

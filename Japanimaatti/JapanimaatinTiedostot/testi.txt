@@ -1,0 +1,3 @@
+dog	 [dog]	 koira	 tunniste1
+cat	 [kät]	 kissa	 tunniste1
+duck	 [dak]	 ankka	 tunniste2

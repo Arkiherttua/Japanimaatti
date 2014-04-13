@@ -1,8 +1,6 @@
-ÔªøKiissuli kiisseli Karavaani meemu EI
-Hund dog koira el√§in EI
-Katze cat kissa el√§in MELKEIN
-Ente duck ankka el√§in EI
-Japan Japan Japani maa MELKEIN
-Finnland Finland Suomi maa EI
-Kekkonen Kekkonen Kekkonen meemu OSATTU
-All your baseAreBelongToUs meemu EI
+der Hund	dog	koira	el‰in	EI
+die Katze	cat	kissa	el‰in	EI
+die Ente	duck	ankka	el‰in	OSATTU
+Finnland	Finland	Suomi	maa	MELKEIN
+Japan	Japan	Japani	maa	OSATTU
+Frankreich	France	Ranska	maa	MELKEIN

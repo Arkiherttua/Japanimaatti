@@ -161,9 +161,9 @@ public class KertausmaattiTest {
     public void kirjoitaOikeanmuotoinenSisaltoTiedostolle(){
         try {
         PrintWriter kirjoitin = new PrintWriter(tiedosto);
-            kirjoitin.println("dog [dog] koira tunniste1");
-            kirjoitin.println("cat [kät] kissa tunniste1");
-            kirjoitin.println("duck [dak] ankka tunniste2");
+            kirjoitin.println("dog\t [dog]\t koira\t tunniste1");
+            kirjoitin.println("cat\t [kät]\t kissa\t tunniste1");
+            kirjoitin.println("duck\t [dak]\t ankka\t tunniste2");
             kirjoitin.close();
         } catch (Exception e) {
         }
@@ -172,10 +172,10 @@ public class KertausmaattiTest {
     public void kirjoitaFeilaavaSisaltoTiedostolle(){
         try {
         PrintWriter kirjoitin = new PrintWriter(tiedosto);
-            kirjoitin.println("tällä rivillä on liian monta sanaa");
+            kirjoitin.println("tällä\trivillä\ton\tliian\tmonta\tsanaa");
             kirjoitin.println("tälläTaasLiianVähän");
-            kirjoitin.println("vika rivi kelpaisi:");
-            kirjoitin.print("dog [dog] koira eläin");
+            kirjoitin.println("vika\trivi\tkelpaisi:");
+            kirjoitin.print("dog\t[dog]\tkoira\teläin");
             kirjoitin.close();
         } catch (Exception e) {
         }

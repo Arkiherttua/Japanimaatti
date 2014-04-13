@@ -4,9 +4,9 @@ package arkkis.japanimaatti.tallennus;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  * 
@@ -34,8 +34,50 @@ public class Tiedostonkasittelija {
         } catch (Exception e){
             System.out.println("Tiedostoa ei löydy, ei talletettu");
         }
-        
-        
+    }
+    /**
+     * Metodi saa listan string-taulukoita, jotka sisältävät tietoa, jonka halutaan päätyvän tiedostoon.
+     * Metodi käy läpi tiedostoa rivi riviltä: jos rivin eka sana täsmää johonkin parametrinä saaduista riveistä,
+     * kirjoittaa metodi tiedostoon tuon muokatun rivin, muutoin saman rivin kuin tiedostossa jo aiemmin oli.
+     * @param muokattavatRivit lista taulukoita: yhdessä taulukossa yhden rivin sanat
+     */
+    public void muokkaaTiedostonTiettyjaRiveja(ArrayList<String[]> muokattavatRivit){
+        PrintWriter kirjoitin = luoKirjoitin();
+        luoLukija();
+        while (lukija.hasNextLine()){
+            String[] rivinSanat = lukija.nextLine().split("\t");
+            String ekaSana = rivinSanat[0];
+            int poistaTamaRivi = -1; //jos mitään ei tarvitse poistaa, tämä indeksi pysyy negatiivisena
+            for (int i = 0; i < muokattavatRivit.size(); i++) {
+                if (ekaSana.equals(muokattavatRivit.get(i)[0])){ //jos eka sana on sama, rivit ovat samat (toivottavasti), kirjoitetaan muokattu rivi tiedostoon
+                    poistaTamaRivi = i;
+                    kirjoitin.print(taulukkoTulostusmuotoon(muokattavatRivit.get(i)));
+                    System.out.println("nyt löytyi sama sana");
+                    break;
+                }
+            }
+            if (poistaTamaRivi != -1){ //jos tätä muokattu, pitää jotain poistaa
+                muokattavatRivit.remove(poistaTamaRivi);
+            } else {
+                kirjoitin.print(rivinSanat);
+                System.out.println("nyt löytyi eri sana");
+            }
+        }
+        kirjoitin.close();
+    }
+    
+    /**
+     * Metodi muokkaa saamansa string-taulukon jälleen yhdeksi tabeilla erotelluksi stringiksi,
+     * jotta taulukon sisältö saadana tiedostoon fiksusti
+     * @param taulukko tiedot, jotka halutaan yhdeksi stringiksi
+     * @return yhdeksi stringiksi muutettu taulukon sisältö
+     */
+    public String taulukkoTulostusmuotoon(String[] taulukko){
+        String palautettava = "";
+        for (int i = 0; i < taulukko.length; i++) {
+            palautettava += taulukko[i] + "\t";
+        }
+        return palautettava.substring(0, palautettava.length()-1);
     }
     
     /**
@@ -45,13 +87,12 @@ public class Tiedostonkasittelija {
      */
     
     public String lueTiedostoSanaKerrallaan() throws NullPointerException{
-
+        luoLukija();
         if (lukija.hasNext()){
             return lukija.next();
         } else {
             return "TIEDOSTON LOPPU";
         }
-       
     }
     
     /**
@@ -60,7 +101,7 @@ public class Tiedostonkasittelija {
      * @throws NullPointerException jos tiedostoa ei ole, ohjelma heittää tällaisen
      */
     public String lueTiedostoRiviKerrallaan() throws NullPointerException{
-
+        luoLukija();
         if (lukija.hasNextLine()){
             return lukija.nextLine();
         } else {
@@ -107,5 +148,15 @@ public class Tiedostonkasittelija {
         } catch (FileNotFoundException ex) {
             System.out.println("Tiedostoa ei löydy!");
         }
+    }
+    
+    public PrintWriter luoKirjoitin(){
+        try {
+            PrintWriter kirjoitin = new PrintWriter(tiedosto);
+            return kirjoitin;
+        } catch (Exception e) {
+            System.out.println("Tiedostoa ei löydy!");
+        }
+        return null;
     }
 }
