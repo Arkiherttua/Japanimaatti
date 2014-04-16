@@ -4,6 +4,7 @@ package arkkis.japanimaatti.tallennus;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -17,24 +18,20 @@ public class Tiedostonkasittelija {
     File tiedosto;
     Scanner lukija;
     
-    
-    public Tiedostonkasittelija(){
-        
-    }
-    
     /**
      * Metodi tallentaa annetun stringin tiedostoon, joka luokalla on luokkamuuttujana
      * @param talletettava teksti, joka halutaan tallentaa
      */
     public void tallennaTiedostoon(String talletettava){
         try {
-            PrintWriter kirjoitin = new PrintWriter(tiedosto);
+            PrintWriter kirjoitin = new PrintWriter(tiedosto); //tilalle metodikutsu? (riippuu siitä miten paljon koodi räjähtää) 
             kirjoitin.print(talletettava);
             kirjoitin.close();
         } catch (Exception e){
             System.out.println("Tiedostoa ei löydy, ei talletettu");
         }
     }
+    
     /**
      * Metodi saa listan string-taulukoita, jotka sisältävät tietoa, jonka halutaan päätyvän tiedostoon.
      * Metodi käy läpi tiedostoa rivi riviltä: jos rivin eka sana täsmää johonkin parametrinä saaduista riveistä,
@@ -86,8 +83,7 @@ public class Tiedostonkasittelija {
      * @throws NullPointerException jos tiedostoa ei ole, ohjelma heittää tällaisen
      */
     
-    public String lueTiedostoSanaKerrallaan() throws NullPointerException{
-        luoLukija();
+    public String lueTiedostoSanaKerrallaan() {
         if (lukija.hasNext()){
             return lukija.next();
         } else {
@@ -100,16 +96,13 @@ public class Tiedostonkasittelija {
      * @return palauttaa tiedostosta luetun rivin stringinä tai TIEDOSTON LOPPU jos ollaan lopussa
      * @throws NullPointerException jos tiedostoa ei ole, ohjelma heittää tällaisen
      */
-    public String lueTiedostoRiviKerrallaan() throws NullPointerException{
-        luoLukija();
+    public String lueTiedostoRiviKerrallaan() {
         if (lukija.hasNextLine()){
             return lukija.nextLine();
         } else {
             return "TIEDOSTON LOPPU";
         }
-       
     }
-    
     
     public File getFile(){
         return tiedosto;

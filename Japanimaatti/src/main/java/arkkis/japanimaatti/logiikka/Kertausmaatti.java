@@ -87,7 +87,8 @@ public class Kertausmaatti {
         kasittelija.setFile(tiedosto);
         String luettu = kasittelija.lueTiedostoRiviKerrallaan();
         while (!luettu.equals("TIEDOSTON LOPPU")){
-            String[] rivinSanat = luettu.split(" ");
+            System.out.println("RIVI!");
+            String[] rivinSanat = luettu.split("\t");
             if (!(rivinSanat.length == 4 || rivinSanat.length == 5)){ 
                 return false; //jos rivillä väärä määrä sanoja, return false
             }
@@ -116,22 +117,21 @@ public class Kertausmaatti {
         String rivi = kasittelija.lueTiedostoRiviKerrallaan();
         while (!rivi.equals("TIEDOSTON LOPPU")){
             if (rivi.contains(tunniste) || !tunnisteet.contains(tunniste)){ //lisätään kerrattavaksi joko tunnisteella varustetut, tai jos tunniste on huono, niin kaikki
-                String[] rivinSanat = rivi.split(" ");
+                String[] rivinSanat = rivi.split("\t");
                 kerrattavat.add(rivinSanat);
             }
             rivi = kasittelija.lueTiedostoRiviKerrallaan();
         }
-        
-        
     }
     
     /**
      * Kun kertaus aloitetaan, kutsutaan tätä metodia joka käy läpi tiedoston ja tekee listan siinä esiintyvistä tunnisteista
      */
     public void haeTunnisteet(){
+        kasittelija.luoLukija();
         String rivi = kasittelija.lueTiedostoRiviKerrallaan();
         while (!rivi.equals("TIEDOSTON LOPPU")){
-            String[] rivinSanat = rivi.split(" ");
+            String[] rivinSanat = rivi.split("\t");
             tunnisteet.add(rivinSanat[3]);
             rivi = kasittelija.lueTiedostoRiviKerrallaan();
         }
@@ -174,7 +174,10 @@ public class Kertausmaatti {
      * sisällön tiedostoon, eli osaamistiedot päivittyvät
      */
     public void tallennaTiedostoon(){
-        kasittelija.muokkaaTiedostonTiettyjaRiveja(kerrattavat);
+        if (kasittelija.getFile() != null) {
+            //kasittelija.muokkaaTiedostonTiettyjaRiveja(kerrattavat);
+            //poissa käytöstä kunnes saan fiksattua tämän
+        }
     }
     
 }

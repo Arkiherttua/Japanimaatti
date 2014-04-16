@@ -7,6 +7,8 @@
 package arkkis.japanimaatti.tallennus;
 
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 /**
  *
@@ -38,29 +40,29 @@ public class AjastimenTiedot {
     }
     
     /**
-     * Metodi käy läpi hashmapin jossa kaikki tiedot ovat ohjelman juoksemisen aikana ja luo niistä merkkijonon
+     * Metodi käy läpi hashmapin, jossa kaikki tiedot ovat ohjelman juoksemisen aikana ja luo niistä merkkijonon
      * @return opiskellut asiat ja opiskelujen kestot
      */
-    public String getOpiskellutAsiatJaOpiskelunKesto(){
-        String palautettava = "";
-        palautettava += "Tässä tilastot opiskelustasi: \n";
-        for (String avain: opiskelut.keySet()) {
-            palautettava += avain + " " + opiskelut.get(avain) + " minuuttia\n";
+    public ArrayList<String> getOpiskellutAsiatJaOpiskelunKesto(){
+        ArrayList<String> opiskellut = new ArrayList();
+        for (String avain : opiskelut.keySet()) {
+            opiskellut.add(avain + " " + opiskelut.get(avain) + " minuuttia");
         }
-        return palautettava;
+        Collections.sort(opiskellut);
+        return opiskellut;
     }
     /**
-     * Metodi käy läpi hashmapin, jossa kaikki tiedot ovat ohjelman juoksemisen aikana ja listaa opiskellut aiheet
-     * @return string-muotoinen lista opiskelluista asioista
+     * Metodi käy läpi hashmapin, jossa kaikki tiedot ovat ohjelman juoksemisen aikana,
+     * listaa opiskellut aiheet ja järjestää niistä tehdyn listan
+     * @return lista opiskelluista asioista
      */
-    
-    public String getOpiskellutAiheet(){
-        String palautettava = "";
+    public ArrayList<String> getOpiskellutAiheet(){
+        ArrayList<String> opiskellutAiheet = new ArrayList();
         for (String avain : opiskelut.keySet()) {
-            palautettava += avain + " ";
+            opiskellutAiheet.add(avain);
         }
-        //palautettava = palautettava.substring(0, palautettava.length()-3);
-        return palautettava;
+        Collections.sort(opiskellutAiheet);
+        return opiskellutAiheet;
     }
     
     /**
@@ -87,7 +89,7 @@ public class AjastimenTiedot {
         try {
             menossaMappiin = kasittelija.lueTiedostoSanaKerrallaan();
         } catch (NullPointerException e){
-            System.out.println("URPO!"); //tähän jotain fiksua joskus
+            System.out.println("Nyt tapahtui jotain kummallista ja tiedostoa ei löydy"); //tähän jotain fiksua joskus
         }
         
         String luettu = kasittelija.lueTiedostoSanaKerrallaan();

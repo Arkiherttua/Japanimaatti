@@ -7,6 +7,7 @@ package arkkis.japanimaatti.logiikka;
 import arkkis.japanimaatti.UI.GraafinenUI;
 import arkkis.japanimaatti.UI.TekstiUI;
 import arkkis.japanimaatti.tallennus.*;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -32,21 +33,36 @@ public class Ajastinmaatti {
     public void setGUI(GraafinenUI GUI){
         this.GUI = GUI;
     }
-    
+    /**
+     * Metodi kutsuu ajastimen tietojen metodia, joka palauttaa aakkostettuna
+     * listana opiskellut asiat ja tekee listasta tulostuskelpoisen stringin.
+     * @return string, jossa kaikki aiheet välilyönnillä eroteltuna
+     */
     public String opiskellutAsiat(){
-        return ajastimenTiedot.getOpiskellutAiheet();
+        String palautettava = "";
+        ArrayList<String> opiskellut = ajastimenTiedot.getOpiskellutAiheet();
+        for (String opiskeltu : opiskellut) {
+            palautettava += opiskeltu + " ";
+        }
+        return palautettava.substring(0, palautettava.length()-1); //poistaa välilyönnin lopusta
     }
     
+    /**
+     * Metodi kutsuu ajastimen tietojen metodia, joka palauttaa aakkostettuna
+     * listana opiskellut asiat opiskelun keston kera ja tekee listasta tulostuskelpoisen stringin.
+     * @return string-muotoinen lista jossa opiskelut kestoineen enterillä eroteltuna
+     */
     public String getOpiskellutAsiatJaOpiskelunKesto(){
-        return ajastimenTiedot.getOpiskellutAsiatJaOpiskelunKesto();
+        String palautettava = "";
+        ArrayList<String> opiskellut = ajastimenTiedot.getOpiskellutAsiatJaOpiskelunKesto();
+        for (String opiskeltu : opiskellut) {
+            palautettava += opiskeltu + "\n";
+        }
+        return palautettava.substring(0, palautettava.length()-1);
     }
     
     public void lisaaUusiOpiskelu(String opiskeltava, int minuuttia){
         ajastimenTiedot.lisaaUusiOpiskelu(opiskeltava, minuuttia);
-    }
-    
-    public String tulostaTiedot(){
-        return ajastimenTiedot.getOpiskellutAsiatJaOpiskelunKesto();
     }
     
     public void tallennaTiedot(){

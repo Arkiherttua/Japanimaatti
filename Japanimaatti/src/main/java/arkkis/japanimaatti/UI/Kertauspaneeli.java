@@ -109,6 +109,7 @@ public class Kertauspaneeli extends JPanel{
     private JButton luoSeuraavanappi(){
         JButton seuraava = new JButton("seuraava");
         seuraava.addActionListener(kuuntelija);
+        //seuraava.setMnemonic('s'); alt+ s painaa samaa nappia...
         return seuraava;
     }
     

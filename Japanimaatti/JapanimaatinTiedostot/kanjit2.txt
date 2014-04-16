@@ -1,6 +1,6 @@
-der Hund	dog	koira	el‰in	EI
-die Katze	cat	kissa	el‰in	EI
-die Ente	duck	ankka	el‰in	OSATTU
+der Hund	dog	koira	el√§in	EI
+die Katze	cat	kissa	el√§in	EI
+die Ente	duck	ankka	el√§in	OSATTU
 Finnland	Finland	Suomi	maa	MELKEIN
 Japan	Japan	Japani	maa	OSATTU
 Frankreich	France	Ranska	maa	MELKEIN

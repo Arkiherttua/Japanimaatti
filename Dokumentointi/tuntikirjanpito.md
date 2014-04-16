@@ -89,3 +89,4 @@ Noin puoli tuntia katselmoitavan koodin ihmettely‰
 Su 13.4
 =======
 J‰lleen noin puoli tuntia koodikatselmoinnin parissa, luin lis‰‰ koodia, kirjoitin palautteen ja laitoin GitHubiin.
+Lis‰ksi noin tunti ep‰onnista koodausta: ohjelma ei en‰‰ k‰ynnisty. 'Jee'.
