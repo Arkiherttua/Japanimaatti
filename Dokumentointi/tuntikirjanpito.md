@@ -90,3 +90,11 @@ Su 13.4
 =======
 Jälleen noin puoli tuntia koodikatselmoinnin parissa, luin lisää koodia, kirjoitin palautteen ja laitoin GitHubiin.
 Lisäksi noin tunti epäonnista koodausta: ohjelma ei enää käynnisty. 'Jee'.
+
+Ti 15.4
+=======
+Vajaa tunti koodin kanssa säätöä, nyt maatti aukeaa mutta tunnisteiden haku hajosi + pientä hienosäätöä toisaalla
+
+Ke 16.4
+=======
+Kurssitoverin avulla sain fiksattua koodin :) Vika oli ilmeisesti siinä, että tiedosto oli matkan varrella kerännyt roskaa.
