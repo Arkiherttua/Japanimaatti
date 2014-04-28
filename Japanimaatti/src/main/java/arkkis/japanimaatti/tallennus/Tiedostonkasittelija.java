@@ -33,34 +33,64 @@ public class Tiedostonkasittelija {
     }
     
     /**
+     * Tallentaa annetun arraylistin tiedostoon, joka luokalla on luokkamuuttujana
+     * @param talletettava 
+     */
+    public void tallennaTiedostoon(ArrayList<String> talletettava){
+        try {
+            PrintWriter kirjoitin = new PrintWriter(tiedosto); //tilalle tähänkin metodikutsu? (riippuu siitä miten paljon koodi räjähtää) 
+            for (String rivi : talletettava) {
+                kirjoitin.println(rivi);
+            }
+            kirjoitin.close();
+        } catch (Exception e){
+            System.out.println("Tiedostoa ei löydy, ei talletettu");
+        }
+    }
+    
+    /**
      * Metodi saa listan string-taulukoita, jotka sisältävät tietoa, jonka halutaan päätyvän tiedostoon.
-     * Metodi käy läpi tiedostoa rivi riviltä: jos rivin eka sana täsmää johonkin parametrinä saaduista riveistä,
-     * kirjoittaa metodi tiedostoon tuon muokatun rivin, muutoin saman rivin kuin tiedostossa jo aiemmin oli.
      * @param muokattavatRivit lista taulukoita: yhdessä taulukossa yhden rivin sanat
      */
     public void muokkaaTiedostonTiettyjaRiveja(ArrayList<String[]> muokattavatRivit){
-        PrintWriter kirjoitin = luoKirjoitin();
         luoLukija();
+        ArrayList<String> tiedostonSisalto = new ArrayList();
+        boolean olikoMuokattujenListalla = false;
+        
         while (lukija.hasNextLine()){
-            String[] rivinSanat = lukija.nextLine().split("\t");
-            String ekaSana = rivinSanat[0];
-            int poistaTamaRivi = -1; //jos mitään ei tarvitse poistaa, tämä indeksi pysyy negatiivisena
-            for (int i = 0; i < muokattavatRivit.size(); i++) {
-                if (ekaSana.equals(muokattavatRivit.get(i)[0])){ //jos eka sana on sama, rivit ovat samat (toivottavasti), kirjoitetaan muokattu rivi tiedostoon
-                    poistaTamaRivi = i;
-                    kirjoitin.print(taulukkoTulostusmuotoon(muokattavatRivit.get(i)));
-                    System.out.println("nyt löytyi sama sana");
-                    break;
+            String[] rivinTeksti = lukija.nextLine().split("\t");
+            for (String[] rivi : muokattavatRivit) {
+                if (rivi[0].equals(rivinTeksti[0])){ //jos eka sana sama, rivit toivottavasti samat, eli halutaan tallentaa muokattu rivi tiedostoon
+                    tiedostonSisalto.add(rivi[0] + rivi[1] + rivi[2] + rivi[3] + rivi[4]);
+                    olikoMuokattujenListalla = true;
                 }
             }
-            if (poistaTamaRivi != -1){ //jos tätä muokattu, pitää jotain poistaa
-                muokattavatRivit.remove(poistaTamaRivi);
-            } else {
-                kirjoitin.print(rivinSanat);
-                System.out.println("nyt löytyi eri sana");
+            if (!olikoMuokattujenListalla){
+                tiedostonSisalto.add(lukija.nextLine());
             }
+            olikoMuokattujenListalla = false;
         }
-        kirjoitin.close();
+        tallennaTiedostoon(tiedostonSisalto);
+//        while (lukija.hasNextLine()){
+//            String[] rivinSanat = lukija.nextLine().split("\t");
+//            String ekaSana = rivinSanat[0];
+//            int poistaTamaRivi = -1; //jos mitään ei tarvitse poistaa, tämä indeksi pysyy negatiivisena
+//            for (int i = 0; i < muokattavatRivit.size(); i++) {
+//                if (ekaSana.equals(muokattavatRivit.get(i)[0])){ //jos eka sana on sama, rivit ovat samat (toivottavasti), kirjoitetaan muokattu rivi tiedostoon
+//                    poistaTamaRivi = i;
+//                    kirjoitin.print(taulukkoTulostusmuotoon(muokattavatRivit.get(i)));
+//                    System.out.println("nyt löytyi sama sana");
+//                    break;
+//                }
+//            }
+//            if (poistaTamaRivi != -1){ //jos tätä muokattu, pitää jotain poistaa
+//                muokattavatRivit.remove(poistaTamaRivi);
+//            } else {
+//                kirjoitin.print(rivinSanat);
+//                System.out.println("nyt löytyi eri sana");
+//            }
+//        }
+        //kirjoitin.close();
     }
     
     /**

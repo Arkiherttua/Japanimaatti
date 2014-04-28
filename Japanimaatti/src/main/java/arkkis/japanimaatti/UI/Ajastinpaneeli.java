@@ -61,14 +61,14 @@ public class Ajastinpaneeli extends JPanel{
      */
     public void setAjastus(){
         int minuuttia = 0;
-        try {
+        try { //vaatisi varmaan refaktorointia tämä metodi...
             minuuttia = Integer.parseInt(minuuttimaara.getText());
             ajastin.ajasta(minuuttia);
+            ui.paivitaTilastot(minuuttia);
             ajastin.lisaaUusiOpiskelu(mitaOpiskelet.getText(), minuuttia);
             ok.setText("Ajastus käynnissä!");
             ok.setEnabled(false);
         } catch (Exception e){
-            
             minuuttimaara.setText("Anna minuuttimäärä kokonaislukuna! Pelkkiä numeroita kiitos!");
         }
     }

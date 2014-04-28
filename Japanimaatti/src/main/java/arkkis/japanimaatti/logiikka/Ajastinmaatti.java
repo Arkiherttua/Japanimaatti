@@ -71,18 +71,17 @@ public class Ajastinmaatti {
     
     /**
      * Metodi toteuttaa varsinaisen ajastuksen javan Timer-luokkaa käyttäen
-     * @param aika käyttäjän antama aika ajastukselle. Lopullisessa versiossa minuutteja, toistaiseksi sekunteja.
+     * @param aika käyttäjän antama aika ajastukselle. Lopullisessa versiossa minuutteja.
      */
     public void ajasta(int aika){
         Timer ajastin = new Timer(true);
-        
         ajastin.schedule(
             new TimerTask() {
                 public void run() {   
                     //UI.ajastusOhi();
                     GUI.getAjastinpaneeli().ajastusOhi();
                 }
-            }, aika * 1000); //aika oletetaan siis annettavaksi sekunteina nyt testivaiheessa
+            }, aika * 60 * 1000); //aika oletetaan siis annettavaksi minuutteina
         
 //        ajastin.scheduleAtFixedRate(
 //            new TimerTask() {

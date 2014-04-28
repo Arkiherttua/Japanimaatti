@@ -28,7 +28,7 @@ public class AjastimenKuuntelija implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(ok)){
-            ajastinpaneeli.setAjastus(); //kovakoodia tässäkin
+            ajastinpaneeli.setAjastus();
         }
     }
     

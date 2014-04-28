@@ -136,11 +136,18 @@ public class GraafinenUI implements Runnable{
      * Metodi asettaa näkyviin tilastopaneelin
      */
     public void tilastomaatti(){
-        tilastot.paivita();
+        tilastot.paivita(0);
         ajastinmaatti.tallennaTiedot(); //tallenna tiedot aina, kun siirretään korttiin joka ei ole ajastin
         kertausmaatti.tallennaTiedostoon(); //samoin paitsi kertausmaatille
         CardLayout cd = (CardLayout)paneelikortit.getLayout();
         cd.show(paneelikortit, "tilastot");
+    }
+    /**
+     * Metodi paivittaa tilasto-korttiin ajastusten kestoa
+     * @param paivitettevaKesto 
+     */
+    public void paivitaTilastot(int paivitettevaKesto){
+        tilastot.paivita(paivitettevaKesto);
     }
     
     public JFrame getFrame(){
