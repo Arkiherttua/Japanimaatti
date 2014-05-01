@@ -17,7 +17,6 @@ public class Tilastopaneeli extends JPanel{
     private GraafinenUI ui;
     private JTextArea opiskellutAsiat;
     private JTextArea muutTilastot;
-    private int kauankoAjastettu = 0;
     
     public Tilastopaneeli(GraafinenUI ui){
         this.ui = ui;
@@ -35,18 +34,18 @@ public class Tilastopaneeli extends JPanel{
     }
     
     private void luoTekstikentat(){
-        opiskellutAsiat = new JTextArea(ui.getAjastinmaatti().getOpiskellutAsiatJaOpiskelunKesto());
+        opiskellutAsiat = new JTextArea("Kaikki ajastukset\n" + ui.getAjastinmaatti().getOpiskellutAsiatJaOpiskelunKesto());
         opiskellutAsiat.setEditable(false);
         
-        muutTilastot = new JTextArea("Ajastusten kesto yhteensä (ohjelman tällä käyttökerralla)\n" + 
-                kauankoAjastettu + " minuuttia");
+        muutTilastot = new JTextArea("Ajastusten kesto yhteensä (ohjelman tällä käyttökerralla)\n0 minuuttia\n" +
+                "Kertaukseen käytetty aikaa yhteensä (tällä käyttökerralla)\n0 minuuttia");
         muutTilastot.setEditable(false);
     }
     
-    public void paivita(int ajastuksenKesto){
+    public void paivita(int ajastustenSumma, int kertaustenSumma){
         opiskellutAsiat.setText(ui.getAjastinmaatti().getOpiskellutAsiatJaOpiskelunKesto());
-        kauankoAjastettu += ajastuksenKesto;
         muutTilastot.setText("Ajastusten kesto yhteensä (ohjelman tällä käyttökerralla)\n" + 
-                kauankoAjastettu + " minuuttia");
+                ajastustenSumma + " minuuttia\n" + 
+                "Kertaukseen käytetty aikaa yhteensä (tällä käyttökerralla)\n" + kertaustenSumma + " minuuttia");
     }
 }

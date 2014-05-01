@@ -35,6 +35,7 @@ public class GraafinenUI implements Runnable{
     private Kertausmaatti kertausmaatti;
     private Ajastinmaatti ajastinmaatti;
     private Tilastopaneeli tilastot;
+    private String nakyvaKortti;
     
     public GraafinenUI(Kertausmaatti kertain, Ajastinmaatti ajastin){
         this.frame = new JFrame("Japanimaatti");
@@ -69,7 +70,7 @@ public class GraafinenUI implements Runnable{
         paneelikortit.add(tilastot, "tilastot");
         paneelikortit.add(kertauspaneeli, "kertain");
         paneelikortit.add(ajastinpaneeli, "ajastin");
-        
+        nakyvaKortti = "alku";
     }
     /**
      * Metodi luo JPanel-olion joka on ohjelman koko ajan näkyvillä oleva valikko
@@ -104,7 +105,7 @@ public class GraafinenUI implements Runnable{
      * jos tiedostoa ei valita, ei kertausmaattitoimintoja tehdä
      */
     public void kertausmaatti(){
-        ajastinmaatti.tallennaTiedot(); //tallenna tiedot aina, kun siirrytään korttiin joka ei ole ajastin
+        //ajastinmaatti.tallennaTiedot(); //tallenna tiedot aina, kun siirrytään korttiin joka ei ole ajastin
         File kertaustiedosto = kertauspaneeli.hankiTiedosto("Valitse tiedosto");
         if (kertaustiedosto != null){
             kertausmaatti.setTiedosto(kertaustiedosto);
@@ -112,14 +113,17 @@ public class GraafinenUI implements Runnable{
             kertauspaneeli.paivitaTunnistekentta();
             CardLayout cd = (CardLayout)paneelikortit.getLayout();
             cd.show(paneelikortit, "kertain");
+            nakyvaKortti = "kertain";
+            kertausmaatti.talletaAloitusaika(); //vähän epätarkka paikka tallentaa, mutta menköön
         }
         
     }
     
     public void alkupaneeli(){
-        ajastinmaatti.tallennaTiedot();
+        //ajastinmaatti.tallennaTiedot();
         CardLayout cd = (CardLayout)paneelikortit.getLayout();
         cd.show(paneelikortit, "alku");
+        nakyvaKortti = "alku";
     }
     
     /**
@@ -127,27 +131,35 @@ public class GraafinenUI implements Runnable{
      */
     public void ajastinmaatti(){
         ajastinpaneeli.paivita();
-        kertausmaatti.tallennaTiedostoon();
+        //kertausmaatti.tallennaTiedostoon();
         CardLayout cd = (CardLayout)paneelikortit.getLayout();   
         cd.show(paneelikortit, "ajastin");
+        nakyvaKortti = "ajastin";
     }
     
     /**
      * Metodi asettaa näkyviin tilastopaneelin
      */
     public void tilastomaatti(){
-        tilastot.paivita(0);
-        ajastinmaatti.tallennaTiedot(); //tallenna tiedot aina, kun siirretään korttiin joka ei ole ajastin
-        kertausmaatti.tallennaTiedostoon(); //samoin paitsi kertausmaatille
+        tilastot.paivita(ajastinmaatti.getAjastustenKesto(), kertausmaatti.getOpiskelunKesto());
+        //ajastinmaatti.tallennaTiedot(); //tallenna tiedot aina, kun siirretään korttiin joka ei ole ajastin
+        //kertausmaatti.tallennaTiedostoon(); //samoin paitsi kertausmaatille
         CardLayout cd = (CardLayout)paneelikortit.getLayout();
         cd.show(paneelikortit, "tilastot");
+        nakyvaKortti = "tilastot";
     }
+    
+    public void suljeAjastinmaatti(){
+        ajastinmaatti.tallennaTiedot();
+    }
+    
     /**
-     * Metodi paivittaa tilasto-korttiin ajastusten kestoa
-     * @param paivitettevaKesto 
+     * Metodia kutsutaan, kun käyttäjä poistuu kertaus-kortista.
+     * Se tallentaa kertauksen aiheuttamat muutokset sekä päivittää kertaukseen käytettyä aikaa
      */
-    public void paivitaTilastot(int paivitettevaKesto){
-        tilastot.paivita(paivitettevaKesto);
+    public void suljeKertausmaatti(){
+        kertausmaatti.tallennaKerrattuAika();
+        kertausmaatti.tallennaTiedostoon();
     }
     
     public JFrame getFrame(){
@@ -168,6 +180,10 @@ public class GraafinenUI implements Runnable{
     
     public Ajastinmaatti getAjastinmaatti(){
         return ajastinmaatti;
+    }
+    
+    public String getNakyvaKortti(){
+        return nakyvaKortti;
     }
     
 }

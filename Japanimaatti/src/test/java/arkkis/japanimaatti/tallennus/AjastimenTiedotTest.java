@@ -61,7 +61,7 @@ public class AjastimenTiedotTest {
         kirjoitaOikeanmuotoinenSyote();
         tiedot.LueTiedotTiedostosta();
         
-        assertEquals("opiskelu1 opiskelu2 ", tiedot.getOpiskellutAiheet());
+        assertEquals("opiskelu1, opiskelu2", tiedot.getOpiskellutAiheet());
     }
     
     @Test
@@ -69,7 +69,7 @@ public class AjastimenTiedotTest {
         kirjoitaOikeanmuotoinenSyote();
         tiedot.LueTiedotTiedostosta();
         
-        assertEquals("Tässä tilastot opiskelustasi: \nopiskelu1 10 minuuttia\nopiskelu2 20 minuuttia\n", tiedot.getOpiskellutAsiatJaOpiskelunKesto());
+        assertEquals("opiskelu1 10 minuuttia, opiskelu2 20 minuuttia", tiedot.getOpiskellutAsiatJaOpiskelunKesto());
     }
     
     @Test

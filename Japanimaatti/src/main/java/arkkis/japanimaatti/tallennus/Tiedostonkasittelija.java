@@ -61,7 +61,7 @@ public class Tiedostonkasittelija {
             String[] rivinTeksti = lukija.nextLine().split("\t");
             for (String[] rivi : muokattavatRivit) {
                 if (rivi[0].equals(rivinTeksti[0])){ //jos eka sana sama, rivit toivottavasti samat, eli halutaan tallentaa muokattu rivi tiedostoon
-                    tiedostonSisalto.add(rivi[0] + rivi[1] + rivi[2] + rivi[3] + rivi[4]);
+                    tiedostonSisalto.add(rivi[0] + "\t" + rivi[1] + "\t" + rivi[2] + "\t" + rivi[3] + "\t" + rivi[4]);
                     olikoMuokattujenListalla = true;
                 }
             }

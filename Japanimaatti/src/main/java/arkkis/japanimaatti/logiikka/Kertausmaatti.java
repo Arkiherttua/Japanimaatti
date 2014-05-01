@@ -20,6 +20,8 @@ public class Kertausmaatti {
     private Kertauspaneeli paneeli;
     private Enum tila;
     private int moneskoRivi;
+    private int kauankoKerrattu = 0; //kauanko kertaumaatti-kortti on ollut näkyvissä ohjelman tällä käyttökerralla
+    private long aloitusaika;
     
     public Kertausmaatti(){
         kasittelija = new Tiedostonkasittelija();
@@ -43,6 +45,19 @@ public class Kertausmaatti {
     
     public void setUI(TekstiUI ui){
         this.ui = ui;
+    }
+    
+    public void talletaAloitusaika(){
+        aloitusaika = System.currentTimeMillis();
+    }
+    
+    public int getOpiskelunKesto(){
+        return kauankoKerrattu;
+    }
+    
+    public void tallennaKerrattuAika(){
+        long kesto = System.currentTimeMillis() - aloitusaika;
+        kauankoKerrattu += (int)kesto / (1000 * 60); //aika halutaan tallentaa minuutteina
     }
     
     /**
@@ -87,7 +102,6 @@ public class Kertausmaatti {
         kasittelija.setFile(tiedosto);
         String luettu = kasittelija.lueTiedostoRiviKerrallaan();
         while (!luettu.equals("TIEDOSTON LOPPU")){
-            System.out.println("RIVI!");
             String[] rivinSanat = luettu.split("\t");
             if (!(rivinSanat.length == 4 || rivinSanat.length == 5)){ 
                 return false; //jos rivillä väärä määrä sanoja, return false
@@ -175,8 +189,7 @@ public class Kertausmaatti {
      */
     public void tallennaTiedostoon(){
         if (kasittelija.getFile() != null) {
-            //kasittelija.muokkaaTiedostonTiettyjaRiveja(kerrattavat);
-            //poissa käytöstä kunnes saan fiksattua tämän
+            kasittelija.muokkaaTiedostonTiettyjaRiveja(kerrattavat);
         }
     }
     

@@ -25,6 +25,7 @@ public class Kertauspaneeli extends JPanel{
     private GraafinenUI ui;
     private JPanel nappikortit;
     private JPanel tekstikortit;
+    
     private Kertausmaatti kertain;
     private JTextArea ekaTekstikentta;
     private JTextArea tokaTekstikentta;
@@ -70,7 +71,6 @@ public class Kertauspaneeli extends JPanel{
         tokaTekstikentta = new JTextArea("");
         tokaTekstikentta.setEditable(false);
         GridLayout tekstiLayout = new GridLayout(1, 2);
-        
         JPanel tekstikentat = new JPanel(tekstiLayout);
         tekstikentat.add(ekaTekstikentta);
         tekstikentat.add(tokaTekstikentta);
@@ -88,6 +88,13 @@ public class Kertauspaneeli extends JPanel{
         tunnisteidenValinta.add(tunnistelista);
         tunnisteidenValinta.add(tunnistekentta);
         return tunnisteidenValinta;
+    }
+    
+    private JPanel luoKerrattavienValinta(){
+        
+        
+        JPanel kerrattavienValinta = new JPanel();
+        return kerrattavienValinta;
     }
     
     private JPanel luoOsaamisnapit(){
@@ -186,11 +193,11 @@ public class Kertauspaneeli extends JPanel{
             if (kertain.onkoTiedostoOikeanmuotoinen(valitsija.getSelectedFile())){
                 return valitsija.getSelectedFile();
             } else {
-                JOptionPane.showMessageDialog(this, "Valitse tiedosto, joka on muotoiltu vastaamaan ohjelman vaatimuksia!");
+                JOptionPane.showMessageDialog(this, "Valitse tiedosto, joka on muotoiltu vastaamaan ohjelman vaatimuksia!", "Varoitus", 0);
                 return hankiTiedosto("Valitse tiedosto, joka on muotoiltu vastaamaan ohjelman vaatimuksia!");
             }
         } else if (valinta== JFileChooser.CANCEL_OPTION){
-            ui.alkupaneeli(); //jos tiedostoa ei valittu, palataan ohjelman aloistutilaan
+            ui.alkupaneeli(); //jos tiedostoa ei valittu, palataan ohjelman aloitustilaan
         }
         return null;
     }

@@ -64,7 +64,6 @@ public class Ajastinpaneeli extends JPanel{
         try { //vaatisi varmaan refaktorointia tämä metodi...
             minuuttia = Integer.parseInt(minuuttimaara.getText());
             ajastin.ajasta(minuuttia);
-            ui.paivitaTilastot(minuuttia);
             ajastin.lisaaUusiOpiskelu(mitaOpiskelet.getText(), minuuttia);
             ok.setText("Ajastus käynnissä!");
             ok.setEnabled(false);

@@ -19,6 +19,7 @@ public class Ajastinmaatti {
     private TekstiUI UI;
     private GraafinenUI GUI;
     private AjastimenTiedot ajastimenTiedot;
+    private int ajastustenKesto = 0; //ohjelman ajon aikaisten kaikkien ajastusten kestojen summa
     
     public Ajastinmaatti(){
         ajastimenTiedot = new AjastimenTiedot();
@@ -74,12 +75,14 @@ public class Ajastinmaatti {
      * @param aika käyttäjän antama aika ajastukselle. Lopullisessa versiossa minuutteja.
      */
     public void ajasta(int aika){
+        final int ajastuksenKesto = aika;
         Timer ajastin = new Timer(true);
         ajastin.schedule(
             new TimerTask() {
                 public void run() {   
                     //UI.ajastusOhi();
                     GUI.getAjastinpaneeli().ajastusOhi();
+                    ajastustenKesto += ajastuksenKesto;
                 }
             }, aika * 60 * 1000); //aika oletetaan siis annettavaksi minuutteina
         
@@ -92,6 +95,10 @@ public class Ajastinmaatti {
 //        ajastin.cancel();
         
         
+    }
+    
+    public int getAjastustenKesto(){
+        return ajastustenKesto;
     }
     
 }
