@@ -91,7 +91,7 @@ public class GraafinenUI implements Runnable{
         menu.add(ajastinnappi);
         menu.add(tilastonappi);
         
-        Kuuntelija k = new Kuuntelija(this, kertausnappi, ajastinnappi, tilastonappi);
+        ValikonKuuntelija k = new ValikonKuuntelija(this, kertausnappi, ajastinnappi, tilastonappi);
         kertausnappi.addActionListener(k);
         ajastinnappi.addActionListener(k);
         tilastonappi.addActionListener(k);

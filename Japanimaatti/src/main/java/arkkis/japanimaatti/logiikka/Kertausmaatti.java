@@ -1,7 +1,6 @@
 package arkkis.japanimaatti.logiikka;
 
 import arkkis.japanimaatti.UI.Kertauspaneeli;
-import arkkis.japanimaatti.UI.TekstiUI;
 import arkkis.japanimaatti.tallennus.Tiedostonkasittelija;
 import java.io.File;
 import java.util.ArrayList;
@@ -16,7 +15,6 @@ public class Kertausmaatti {
     private Tiedostonkasittelija kasittelija;
     private HashSet<String> tunnisteet;
     private ArrayList<String[]> kerrattavat;
-    private TekstiUI ui;
     private Kertauspaneeli paneeli;
     private Enum tila;
     private int moneskoRivi;
@@ -41,10 +39,7 @@ public class Kertausmaatti {
     public void setTiedosto(File tiedosto){
         kasittelija.setFile(tiedosto);
     }
-    
-    public void setUI(TekstiUI ui){
-        this.ui = ui;
-    }
+
     
     public void talletaAloitusaika(){
         aloitusaika = System.currentTimeMillis();

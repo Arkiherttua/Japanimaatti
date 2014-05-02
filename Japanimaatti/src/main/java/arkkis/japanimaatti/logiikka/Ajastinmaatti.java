@@ -5,7 +5,6 @@
 package arkkis.japanimaatti.logiikka;
 
 import arkkis.japanimaatti.UI.GraafinenUI;
-import arkkis.japanimaatti.UI.TekstiUI;
 import arkkis.japanimaatti.tallennus.*;
 import java.util.ArrayList;
 import java.util.Timer;
@@ -16,7 +15,6 @@ import java.util.TimerTask;
  *
  */
 public class Ajastinmaatti {
-    private TekstiUI UI;
     private GraafinenUI GUI;
     private AjastimenTiedot ajastimenTiedot;
     private int ajastustenKesto = 0; //ohjelman ajon aikaisten kaikkien ajastusten kestojen summa
@@ -25,10 +23,6 @@ public class Ajastinmaatti {
         ajastimenTiedot = new AjastimenTiedot();
         ajastimenTiedot.setFile();
         ajastimenTiedot.LueTiedotTiedostosta();
-    }
-    
-    public void setUI(TekstiUI UI){
-        this.UI = UI;
     }
     
     public void setGUI(GraafinenUI GUI){

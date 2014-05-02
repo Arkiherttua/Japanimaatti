@@ -12,11 +12,11 @@ import javax.swing.JButton;
  *
  * @author Kulmala
  */
-public class Kuuntelija implements ActionListener{
+public class ValikonKuuntelija implements ActionListener{
     private JButton kertaus, ajastus, tilastot;
     private GraafinenUI ui;
     
-    public Kuuntelija(GraafinenUI ui, JButton kertaus, JButton ajastus, JButton tilastot){
+    public ValikonKuuntelija(GraafinenUI ui, JButton kertaus, JButton ajastus, JButton tilastot){
         this.ui = ui;
         this.kertaus = kertaus;
         this.ajastus = ajastus;

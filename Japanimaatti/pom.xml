@@ -24,6 +24,19 @@
 </dependencies>
 
 <build>
+    <resources>
+        <resource>
+            <directory>Japanimaatti/JapanimaatinTiedostot</directory>
+            <includes>
+                <include>[resource file #1]</include>
+                <include>[resource file #2]</include>
+                <include>[resource file #3]</include>
+                <include>[resource file #n]</include>
+            </includes>
+        </resource>
+    </resources>
+
+    
     <plugins>
         <plugin>
             <groupId>org.apache.maven.plugins</groupId>
