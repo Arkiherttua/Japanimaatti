@@ -98,3 +98,29 @@ Vajaa tunti koodin kanssa säätöä, nyt maatti aukeaa mutta tunnisteiden haku hajo
 Ke 16.4
 =======
 Kurssitoverin avulla sain fiksattua koodin :) Vika oli ilmeisesti siinä, että tiedosto oli matkan varrella kerännyt roskaa.
+
+Pe 25.4
+=======
+Koodikatselmoinnissa kateellisuuden puuskia muiden eeppisistä projekteista.
+
+Su 27.4
+=======
+Puoli tuntia tallenustoimintojen rakentelua
+
+Ma 28.4
+=======
+Vähän vajaa tunti tilastopaneeliin uuden toiminnon rakentelua, refaktoroinnin tarpeen tuskastelua ja hienosäätöä muuallakin kait
+
+Ti 29.4
+=======
+Reilu tunti tilastopaneelin rakentelua ja refaktorointia asian tiimoilta muuallakin
+
+To 1.5
+======
+Vajaa kolme tuntia kertausmaatin tallennustoimintojen väsäämistä ja fiksailua. Myös sekalaista hienomista muualla.
+
+Pe 2.5
+======
+Tätä kirjoittaessani päivää on vielä jäljellä, mutta aikaa javalabraan käytetty jo melkein kolme tuntia.
+
+Kirjoitettua dokumentaatiota ja tehty testejä lähinnä, myös hienosäätöä ja debuggausta tehty yms.
