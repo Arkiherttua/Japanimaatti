@@ -84,7 +84,7 @@ public class KertausmaattiTest {
     public void haeKerrattavatToimiiKunKaikkiHyvin() {
         kirjoitaOikeanmuotoinenSisaltoTiedostolle();
         kertain.haeTunnisteet();
-        kertain.haeKerrattavat(" tunniste2 ");
+        kertain.haeKerrattavat(" tunniste2 ", "");
         ArrayList<String[]> kerrattavat = kertain.getKerrattavat();
         assertEquals(1, kerrattavat.size());
         assertEquals("duck [dak] ankka tunniste2", kerrattavat.get(0)[0] + " " + kerrattavat.get(0)[1] + " " + kerrattavat.get(0)[2] + " " + kerrattavat.get(0)[3]);
@@ -102,7 +102,7 @@ public class KertausmaattiTest {
     public void tilaOikeaKunMerkkiNakyvilla() {
         kirjoitaOikeanmuotoinenSisaltoTiedostolle();
         kertain.haeTunnisteet();
-        kertain.haeKerrattavat("tunniste2");
+        kertain.haeKerrattavat("tunniste2", "");
         kertain.annaSeuraava();
         assertEquals(KertausmaatinTila.KANJI, kertain.getKertauksenTila());
     }
@@ -111,7 +111,7 @@ public class KertausmaattiTest {
     public void tilaOikeaKunAantaminenNakyvilla() {
         kirjoitaOikeanmuotoinenSisaltoTiedostolle();
         kertain.haeTunnisteet();
-        kertain.haeKerrattavat("tunniste2");
+        kertain.haeKerrattavat("tunniste2", "");
         kertain.annaSeuraava();
         kertain.annaSeuraava();
         assertEquals(KertausmaatinTila.KANA, kertain.getKertauksenTila());
@@ -121,7 +121,7 @@ public class KertausmaattiTest {
     public void tilaOikeaKunSuomennosNakyvilla() {
         kirjoitaOikeanmuotoinenSisaltoTiedostolle();
         kertain.haeTunnisteet();
-        kertain.haeKerrattavat("tunniste2");
+        kertain.haeKerrattavat("tunniste2", "");
         kertain.annaSeuraava();
         kertain.annaSeuraava();
         kertain.annaSeuraava();
@@ -132,7 +132,7 @@ public class KertausmaattiTest {
     public void annaSeuraavaToimiiOsa1() {
         kirjoitaOikeanmuotoinenSisaltoTiedostolle();
         kertain.haeTunnisteet();
-        kertain.haeKerrattavat("tunniste2");
+        kertain.haeKerrattavat("tunniste2", "");
         String ekaKerrattava = kertain.annaSeuraava();
         assertEquals("duck", ekaKerrattava);
     }
@@ -141,7 +141,7 @@ public class KertausmaattiTest {
     public void annaSeuraavaToimiiOsa2() {
         kirjoitaOikeanmuotoinenSisaltoTiedostolle();
         kertain.haeTunnisteet();
-        kertain.haeKerrattavat("tunniste2");
+        kertain.haeKerrattavat("tunniste2", "");
         kertain.annaSeuraava();
         String tokaKerrattava = kertain.annaSeuraava();
         assertEquals("[dak]", tokaKerrattava);
@@ -151,7 +151,7 @@ public class KertausmaattiTest {
     public void annaSeuraavaToimiiOsa3() {
         kirjoitaOikeanmuotoinenSisaltoTiedostolle();
         kertain.haeTunnisteet();
-        kertain.haeKerrattavat("tunniste2");
+        kertain.haeKerrattavat("tunniste2", "");
         kertain.annaSeuraava();
         kertain.annaSeuraava();
         String kolmasKerrattava = kertain.annaSeuraava();

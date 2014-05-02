@@ -110,7 +110,8 @@ public class GraafinenUI implements Runnable{
         if (kertaustiedosto != null){
             kertausmaatti.setTiedosto(kertaustiedosto);
             kertausmaatti.haeTunnisteet();
-            kertauspaneeli.paivitaTunnistekentta();
+            //kertauspaneeli.paivitaTunnistekentta();
+            kertauspaneeli.luoTunnisteidenValinta();
             CardLayout cd = (CardLayout)paneelikortit.getLayout();
             cd.show(paneelikortit, "kertain");
             nakyvaKortti = "kertain";

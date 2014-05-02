@@ -84,17 +84,7 @@ public class Ajastinmaatti {
                     GUI.getAjastinpaneeli().ajastusOhi();
                     ajastustenKesto += ajastuksenKesto;
                 }
-            }, aika * 60 * 1000); //aika oletetaan siis annettavaksi minuutteina
-        
-//        ajastin.scheduleAtFixedRate(
-//            new TimerTask() {
-//                public void run() { 
-//                    //jotain fiksua tähän
-//                }
-//            }, 0, aika * 60 * 1000); 
-//        ajastin.cancel();
-        
-        
+            }, aika * 1 * 1000); //aika oletetaan siis annettavaksi minuutteina
     }
     
     public int getAjastustenKesto(){

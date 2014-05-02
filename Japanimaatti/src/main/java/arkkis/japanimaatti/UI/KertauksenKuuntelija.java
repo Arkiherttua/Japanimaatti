@@ -16,34 +16,46 @@ import javax.swing.JPanel;
  */
 public class KertauksenKuuntelija implements ActionListener{
     Kertauspaneeli kertauspaneeli;
-    JButton seuraava, osasin, melkein, enOsannut, tunnistenappi;
+    JButton ok, osasin, melkein, enOsannut;
     
     public KertauksenKuuntelija(Kertauspaneeli kertauspaneeli){
         this.kertauspaneeli = kertauspaneeli;
         
     }
     
-    public void setNapit(JButton seuraava, JButton osasin, JButton melkein, JButton enOsannut, JButton tunnistenappi){
-        this.seuraava = seuraava;
+    public void setNapit(JButton ok, JButton osasin, JButton melkein, JButton enOsannut){
+        this.ok = ok;
         this.osasin = osasin;
         this.melkein = melkein;
         this.enOsannut = enOsannut;
-        this.tunnistenappi = tunnistenappi;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource().equals(seuraava)){
-            kertauspaneeli.naytaSeuraava();
-            //String seuraava = kertauspaneeli.annaMerkki();
+        if (e.getSource().equals(ok)){
+            valitseOikeaTapahtumaKunOkNappiaPainetaan();
         }else if (e.getSource().equals(osasin)){
             kertauspaneeli.paivitaOsaaminen(OsaamisenTila.OSATTU);
         } else if (e.getSource().equals(melkein)){
             kertauspaneeli.paivitaOsaaminen(OsaamisenTila.MELKEIN);
         } else if (e.getSource().equals(enOsannut)){
             kertauspaneeli.paivitaOsaaminen(OsaamisenTila.EI);
-        } else if (e.getSource().equals(tunnistenappi)){
+        }
+    }
+    /**
+     * Metodiin on eriytytty if-else -puu, joka valitsee, mitä kertauspaneelin metodia
+     * kutsutaan, kun ok-nappia painetaan, sillä ohjelman vaiheesta riippuu, mitä pitää
+     * tapahtua.
+     */
+    private void valitseOikeaTapahtumaKunOkNappiaPainetaan(){
+        if (ok.getText().equals("Seuraava")){
+            kertauspaneeli.naytaSeuraava();
+        } else if (ok.getText().equals("Valitse kerrattavat")){    
+            kertauspaneeli.tallennaOsaamistasonTunniste();
             kertauspaneeli.haeKerrattavat();
+        } else if (ok.getText().equals("Valitse tunniste")) {
+            kertauspaneeli.tallennaKerrattavienTunniste();
+            kertauspaneeli.luoKerrattavienValinta();    
         }
     }
     

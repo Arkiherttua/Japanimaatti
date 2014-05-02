@@ -25,7 +25,6 @@ public class Kertausmaatti {
     
     public Kertausmaatti(){
         kasittelija = new Tiedostonkasittelija();
-        //kasittelija.setFile("JapanimaatinTiedostot/kanjit.txt"); //kovakoodausta...
         kerrattavat = new ArrayList();
         tunnisteet = new HashSet();
         tila = KertausmaatinTila.TYHJA;
@@ -100,6 +99,9 @@ public class Kertausmaatti {
      */
     public boolean onkoTiedostoOikeanmuotoinen(File tiedosto){
         kasittelija.setFile(tiedosto);
+        if (!tiedosto.getName().substring(tiedosto.getName().length()-4).equals(".txt")){
+            return false; //jos tiedosto ei .txt metodi palauttaa false
+        }
         String luettu = kasittelija.lueTiedostoRiviKerrallaan();
         while (!luettu.equals("TIEDOSTON LOPPU")){
             String[] rivinSanat = luettu.split("\t");
@@ -126,14 +128,22 @@ public class Kertausmaatti {
      * 
      * @param tunniste tällä tunnisteella varustetut rivit tutkitaan
      */
-    public void haeKerrattavat(String tunniste){
+    public void haeKerrattavat(String tunniste, String osaamistaso){
+        System.out.println(tunniste + " osaamistaso: " + osaamistaso);
         kasittelija.luoLukija();
         String rivi = kasittelija.lueTiedostoRiviKerrallaan();
         while (!rivi.equals("TIEDOSTON LOPPU")){
-            if (rivi.contains(tunniste) || !tunnisteet.contains(tunniste)){ //lisätään kerrattavaksi joko tunnisteella varustetut, tai jos tunniste on huono, niin kaikki
-                String[] rivinSanat = rivi.split("\t");
-                kerrattavat.add(rivinSanat);
+            if (rivi.contains(osaamistaso)){
+                if (!tunnisteet.contains(tunniste) || rivi.contains(tunniste)){
+                    String[] rivinSanat = rivi.split("\t");
+                    kerrattavat.add(rivinSanat);
+                }
             }
+            
+//            if (rivi.contains(osaamistaso)&& (rivi.contains(tunniste) || !tunnisteet.contains(tunniste))){ //lisätään kerrattavaksi joko tunnisteella varustetut, tai jos tunniste on huono, niin kaikki
+//                String[] rivinSanat = rivi.split("\t");
+//                kerrattavat.add(rivinSanat);
+//            }
             rivi = kasittelija.lueTiedostoRiviKerrallaan();
         }
     }
@@ -172,6 +182,10 @@ public class Kertausmaatti {
     
     public void setKertauksenTila(Enum tila){
         this.tila = tila;
+    }
+    
+    public int getKerrattavienMaara(){
+        return kerrattavat.size();
     }
     
     /**

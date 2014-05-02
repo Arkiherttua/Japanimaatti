@@ -6,6 +6,7 @@ package arkkis.japanimaatti.UI;
 
 import arkkis.japanimaatti.logiikka.Ajastinmaatti;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -76,6 +77,7 @@ public class Ajastinpaneeli extends JPanel{
      * Kun ajastus on ohi, tämä metodi asettaa ajastusnapin taas toimintaan ja päivittää tekstikenttiä.
      */
     public void ajastusOhi(){
+        Toolkit.getDefaultToolkit().beep();
         tekstikentta.setText("Ajastus ohi ja tiedot tallennettu.\n Voit asettaa uuden ajastuksen vastaavasti kuin asetit edellisen.");
         ok.setText("OK");
         ok.setEnabled(true);
