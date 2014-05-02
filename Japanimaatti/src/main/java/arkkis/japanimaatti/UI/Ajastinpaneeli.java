@@ -42,7 +42,7 @@ public class Ajastinpaneeli extends JPanel{
         
         minuuttimaara = new JTextArea("Montako minuuttia?");
         mitaOpiskelet = new JTextArea("Mitä opiskelet?");
-        opiskellutAsiat = new JTextArea("Jo opiskellut asiat:\n" + this.ajastin.opiskellutAsiat());
+        opiskellutAsiat = new JTextArea("Jo opiskellut asiat:\n" + this.ajastin.getOpiskellutAsiat());
         opiskellutAsiat.setEditable(false);
     }
         
@@ -87,7 +87,7 @@ public class Ajastinpaneeli extends JPanel{
      * Aina kun ajastinpaneeli-'kortti' otetaan esiin, graafinenUI kutsuu tätä metodia, joka päivittää tekstikentät alkuasentoon
      */
     public void paivita(){
-        opiskellutAsiat.setText("Jo opiskellut asiat:\n" + this.ajastin.opiskellutAsiat());
+        opiskellutAsiat.setText("Jo opiskellut asiat:\n" + this.ajastin.getOpiskellutAsiat());
         tekstikentta.setText("Syötä ajastuksen tiedot ja paina OK");
         minuuttimaara.setText("Montako minuuttia?");
         mitaOpiskelet.setText("Mitä opiskelet?");

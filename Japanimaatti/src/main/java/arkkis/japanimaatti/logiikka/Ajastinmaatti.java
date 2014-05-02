@@ -39,7 +39,7 @@ public class Ajastinmaatti {
      * listana opiskellut asiat ja tekee listasta tulostuskelpoisen stringin.
      * @return string, jossa kaikki aiheet välilyönnillä eroteltuna
      */
-    public String opiskellutAsiat(){
+    public String getOpiskellutAsiat(){
         String palautettava = "";
         ArrayList<String> opiskellut = ajastimenTiedot.getOpiskellutAiheet();
         for (String opiskeltu : opiskellut) {
@@ -79,12 +79,11 @@ public class Ajastinmaatti {
         Timer ajastin = new Timer(true);
         ajastin.schedule(
             new TimerTask() {
-                public void run() {   
-                    //UI.ajastusOhi();
+                public void run() {
                     GUI.getAjastinpaneeli().ajastusOhi();
                     ajastustenKesto += ajastuksenKesto;
                 }
-            }, aika * 1 * 1000); //aika oletetaan siis annettavaksi minuutteina
+            }, aika * 60 * 1000); //aika oletetaan siis annettavaksi minuutteina
     }
     
     public int getAjastustenKesto(){

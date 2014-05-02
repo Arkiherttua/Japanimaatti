@@ -105,7 +105,7 @@ public class Kertausmaatti {
         String luettu = kasittelija.lueTiedostoRiviKerrallaan();
         while (!luettu.equals("TIEDOSTON LOPPU")){
             String[] rivinSanat = luettu.split("\t");
-            if (!(rivinSanat.length == 4 || rivinSanat.length == 5)){ 
+            if (!(rivinSanat.length == 5)){ 
                 return false; //jos rivillä väärä määrä sanoja, return false
             }
             luettu = kasittelija.lueTiedostoRiviKerrallaan();
@@ -129,7 +129,6 @@ public class Kertausmaatti {
      * @param tunniste tällä tunnisteella varustetut rivit tutkitaan
      */
     public void haeKerrattavat(String tunniste, String osaamistaso){
-        System.out.println(tunniste + " osaamistaso: " + osaamistaso);
         kasittelija.luoLukija();
         String rivi = kasittelija.lueTiedostoRiviKerrallaan();
         while (!rivi.equals("TIEDOSTON LOPPU")){
@@ -139,7 +138,6 @@ public class Kertausmaatti {
                     kerrattavat.add(rivinSanat);
                 }
             }
-            
 //            if (rivi.contains(osaamistaso)&& (rivi.contains(tunniste) || !tunnisteet.contains(tunniste))){ //lisätään kerrattavaksi joko tunnisteella varustetut, tai jos tunniste on huono, niin kaikki
 //                String[] rivinSanat = rivi.split("\t");
 //                kerrattavat.add(rivinSanat);

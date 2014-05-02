@@ -24,7 +24,7 @@ public class AjastimenTiedot {
     }
     
     public void setFile(){
-        kasittelija.setFile("JapanimaatinTiedostot/ajastintiedosto.txt"); //tähän sen tiedoston nimi!!!
+        kasittelija.setFile("JapanimaatinTiedostot/ajastintiedosto.txt"); //tähän sen tiedoston nimi!
     }
     
     public void setFile(String polku){
@@ -70,14 +70,12 @@ public class AjastimenTiedot {
      * @param opiskeltava mitä on opiskeltu
      * @param minuuttia kuinka kauan opiskelu on kestänyt
      */
-    
     public void lisaaUusiOpiskelu(String opiskeltava, int minuuttia){
         opiskeltava = opiskeltava.toLowerCase(); // varmistetaan ettei esim. caps lock haittaa
             if (opiskelut.containsKey(opiskeltava)){
                 minuuttia += opiskelut.get(opiskeltava);
             }
             opiskelut.put(opiskeltava, minuuttia);
-        
     }
     
     /**

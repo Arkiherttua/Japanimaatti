@@ -1,0 +1,2 @@
+opiskelu1 10
+opiskelu2 20

@@ -14,10 +14,12 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *
- * @author ainohaav@cs
+ * No eipähän tästä saanut testattua juuri mitään ilman, että olisi eeppisesti
+ * säätänyt ajastimen tiedot -luokan kanssa saman aikaisesti.
+ * 
  */
 public class AjastinmaattiTest {
+    private Ajastinmaatti ajastin;
     
     public AjastinmaattiTest() {
     }
@@ -32,15 +34,16 @@ public class AjastinmaattiTest {
     
     @Before
     public void setUp() {
+        ajastin = new Ajastinmaatti();
     }
     
     @After
     public void tearDown() {
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+    @Test
+    public void aluksiAjastustenSummaOnNollaJaGetAjastustenKestoToimii() {
+        assertTrue(0 == ajastin.getAjastustenKesto());
+    }
+
 }

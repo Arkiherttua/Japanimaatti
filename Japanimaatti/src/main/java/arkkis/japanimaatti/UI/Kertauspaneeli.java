@@ -112,7 +112,7 @@ public class Kertauspaneeli extends JPanel{
                 "vai merkit, jotka olet merkinnyt\nmelkein osaavasi, vai kaikki merkit.");
 
         tokaTekstikentta.setText("Kirjoita tähän \"melkein\", jos haluat\nkerrata merkit, jotka jo melkein osaat.\n"+
-                "Kirjoita \"ei\" jos haluat kerrata vain ne\n,joita et osaa lainkaan.\n"+
+                "Kirjoita \"ei\" jos haluat kerrata vain ne,\njoita et osaa lainkaan.\n"+
                 "Jos et muokkaa kenttää,\npääset kertaamaan kaikki tiedoston rivit.");
         ok.setText("Valitse kerrattavat");
     }

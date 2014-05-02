@@ -6,6 +6,7 @@ package arkkis.japanimaatti.tallennus;
 
 import java.io.File;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Scanner;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -20,6 +21,7 @@ import static org.junit.Assert.*;
  */
 public class TiedostonkasittelijaTest {
     File tiedosto;
+    Tiedostonkasittelija kasittelija;
     
     public TiedostonkasittelijaTest() {
     }
@@ -35,22 +37,18 @@ public class TiedostonkasittelijaTest {
     @Before
     public void setUp() {
         try {
-            tiedosto = new File("JapanimaatinTiedostot/testi.txt");
-            PrintWriter kirjoitin = new PrintWriter(tiedosto);
-            kirjoitin.print("");
-            kirjoitin.close();
-            //lukija = new Scanner(tiedosto);
+            alustaTyhjaTestitiedosto();
+            kasittelija = new Tiedostonkasittelija();
+            kasittelija.setFile(tiedosto);
         } catch (Exception e){
-            System.out.println("Tiedostoa ei löydy");
+            System.out.println("Tiedostoa ei löydy setUpissa");
         }
     }
     
     @After
     public void tearDown() {
     }
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
+
     @Test
     public void setFileToimiiKunTiedostoOlemassa() {
         Tiedostonkasittelija k = new Tiedostonkasittelija();
@@ -72,17 +70,41 @@ public class TiedostonkasittelijaTest {
         assertFalse(k.setFile(eiOleTiedostonNimi));
     }
     
-//    @Test
-//    public void tiedostoonTallentaminenToimii() {
-//        Tiedostonkasittelija k = new Tiedostonkasittelija();
-//        k.setFile("JapanimaatinTiedostot/testi.txt");
-//        k.tallennaTiedostoon("testi1");
-//    }
+    @Test
+    public void tiedostoonTallentaminenToimii() {
+        kasittelija.tallennaTiedostoon("testi1");
+        String a = "";
+        try {
+            Scanner lukija = new Scanner(tiedosto);
+            a = lukija.nextLine();
+        } catch (Exception e){
+            a = "Tiedostoa ei löydy!";
+        }
+        assertEquals("testi1", a);
+    }
+    
+    @Test
+    public void tiedostonMuokkaaminenToimii() {
+        kasittelija.setFile(tiedosto);
+        kasittelija.tallennaTiedostoon("testi1\ttesti2\ttesti3\ttesti4\ttesti5");
+        String a = "";
+        ArrayList<String[]> lista = new ArrayList<>();
+        lista.add(new String[]{"testi1", "testi2", "testi3", "testi4", "muokattuTesti5"});
+        try {
+            kasittelija.muokkaaTiedostonTiettyjaRiveja(lista);
+            Scanner lukija = new Scanner(tiedosto);
+            a += lukija.nextLine();
+        } catch (Exception e){
+            a += "Tiedostoa ei löydy";
+        }
+        assertEquals("testi1\ttesti2\ttesti3\ttesti4\tmuokattuTesti5", a);
+    }
+
     
     public File alustaTyhjaTestitiedosto(){ //asettaa testiluokalle tiedoston ja tyhjentää sen
        
         try {
-            File tiedosto = new File("JapanimaatinTiedostot/testi.txt");
+            tiedosto = new File("JapanimaatinTiedostot/testi.txt");
             PrintWriter kirjoitin = new PrintWriter(tiedosto);
             kirjoitin.print("");
             kirjoitin.close();
