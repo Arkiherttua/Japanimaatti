@@ -67,7 +67,7 @@ public class Tiedostonkasittelija {
                 }
             }
             if (!olikoMuokattujenListalla){
-                tiedostonSisalto.add(lukija.nextLine());
+                tiedostonSisalto.add(rivinTeksti[0] + "\t" + rivinTeksti[1] + "\t" + rivinTeksti[2] + "\t" + rivinTeksti[3] + "\t" + rivinTeksti[4]);
             }
             olikoMuokattujenListalla = false;
         }

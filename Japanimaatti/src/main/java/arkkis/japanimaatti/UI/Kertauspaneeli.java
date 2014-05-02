@@ -24,13 +24,10 @@ public class Kertauspaneeli extends JPanel{
     private GraafinenUI ui;
     private JPanel nappikortit;
     private JPanel tekstikortit;
-    //private JPanel kortit;
     private Kertausmaatti kertain;
     private JTextArea ekaTekstikentta;
     private JTextArea tokaTekstikentta;
     private JButton ok;
-    //private JTextArea tunnistelista;
-    //private JTextArea tunnistekentta;
     private KertauksenKuuntelija kuuntelija;
     private String osaamistasonTunniste;
     private String kerrattavienTunniste;
@@ -47,17 +44,14 @@ public class Kertauspaneeli extends JPanel{
         GridLayout tekstikenttienLayout = new GridLayout(1, 2);
         tekstikentat.setLayout(tekstikenttienLayout);
         
-        ok = new JButton("Valitse tunniste"); //aluksi tämä teksti
+        ok = new JButton();
         ekaTekstikentta = new JTextArea();
         ekaTekstikentta.setEditable(false);
         tokaTekstikentta = new JTextArea();
         
         tekstikentat.add(ekaTekstikentta);
         tekstikentat.add(tokaTekstikentta);
-        //JPanel tunnisteidenValinta = luoTunnisteidenValinta();
-        
-        //this.kortit = new JPanel(new CardLayout());
-        //this.tekstikortit = new JPanel(new CardLayout());
+
         this.nappikortit = new JPanel(new CardLayout());
         
         kuuntelija = new KertauksenKuuntelija(this);
@@ -67,35 +61,17 @@ public class Kertauspaneeli extends JPanel{
 
         kuuntelija.setNapit(ok, (JButton)osaamisnapit.getComponent(0), (JButton)osaamisnapit.getComponent(1), (JButton)osaamisnapit.getComponent(2));
         
-        //tekstikortit.add(tunnisteidenValinta, "tunnisteet");
-        //tekstikortit.add(tekstikentat, "tekstikentat");
-        
         nappikortit.add(ok, "ok");
         nappikortit.add(osaamisnapit, "osaamisnapit");
         
-        //this.add(tekstikortit);
         this.add(tekstikentat);
         this.add(nappikortit);
     }
-    
-//    private JPanel luoTunnistekortti(){
-//        JPanel tunnistekortti = new JPanel();
-//        this.ekaTekstikentta.setText("Valitsit tiedoston onnistuneesti. \nValitse vielä, millä tunnisteella varustetut \nmerkit haluat kerrata. Valittavat tunnisteet:\n" + kertain.getTunnisteet());
-//        return tunnistekortti;
-//    }
-    
-//    private JPanel luoTekstikentat(){
-//        ekaTekstikentta = new JTextArea("Aloita kertaaminen painamalla seuraava-nappia");
-//        ekaTekstikentta.setEditable(false);
-//        tokaTekstikentta = new JTextArea("");
-//        tokaTekstikentta.setEditable(false);
-//        GridLayout tekstiLayout = new GridLayout(1, 2);
-//        JPanel tekstikentat = new JPanel(tekstiLayout);
-//        tekstikentat.add(ekaTekstikentta);
-//        tekstikentat.add(tokaTekstikentta);
-//        return tekstikentat;
-//    }
-    
+
+    /**
+     * Metodi muokkaa tekstiknettiä ja nappeja siihen kuntoon, että käyttäjä
+     * voi valita tunnisteen kertaamista varten
+     */
     public void luoTunnisteidenValinta(){
         ekaTekstikentta.setText("Valitsit tiedoston onnistuneesti. \n"
                 + "Valitse vielä, millä tunnisteella varustetut \nmerkit haluat kerrata. "+
@@ -103,12 +79,17 @@ public class Kertauspaneeli extends JPanel{
 
         tokaTekstikentta.setText("Kirjoita tunniste tähän ja paina valitse-nappia.\n"+
                 "Jos et muokkaa tätä kenttää, ohjelma valitsee\n kerrattavaksi kaikki tiedoston rivit.");
-//        CardLayout cd = (CardLayout)nappikortit.getLayout();
-//        cd.show(nappikortit, "ok");
+        vaihdaOKnappiin();
+        ok.setText("Valitse tunniste");
+        tokaTekstikentta.setEditable(true);
     }
     
+    /**
+     * Metodi muokkaa tekstikenttiä siihen kuntoon, että käyttäjä voi valita,
+     * minkä osaamistason merkit haluaa kerrata.
+     */
     public void luoKerrattavienValinta(){
-        ekaTekstikentta.setText("Valitse vielä, haluatko kerrata merkit\n, jotka olet merkinnyt ei-osatuiksi,\n"+
+        ekaTekstikentta.setText("Valitse vielä, haluatko kerrata merkit,\n jotka olet merkinnyt ei-osatuiksi,\n"+
                 "vai merkit, jotka olet merkinnyt\nmelkein osaavasi, vai kaikki merkit.");
 
         tokaTekstikentta.setText("Kirjoita tähän \"melkein\", jos haluat\nkerrata merkit, jotka jo melkein osaat.\n"+
@@ -192,10 +173,10 @@ public class Kertauspaneeli extends JPanel{
         this.ekaTekstikentta.setText("");
         this.tokaTekstikentta.setText("");
         naytaSeuraava();
-        vaihdaSeuraavanappiin();
+        vaihdaOKnappiin();
     }
     
-    private void vaihdaSeuraavanappiin(){
+    private void vaihdaOKnappiin(){
         CardLayout cd = (CardLayout)nappikortit.getLayout();
         cd.show(nappikortit, "ok");
     }
@@ -248,10 +229,4 @@ public class Kertauspaneeli extends JPanel{
     public void tallennaKerrattavienTunniste(){
         kerrattavienTunniste = tokaTekstikentta.getText();
     }
-
-    
-    
-    
-
-    
 }

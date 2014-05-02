@@ -105,23 +105,19 @@ public class GraafinenUI implements Runnable{
      * jos tiedostoa ei valita, ei kertausmaattitoimintoja tehdä
      */
     public void kertausmaatti(){
-        //ajastinmaatti.tallennaTiedot(); //tallenna tiedot aina, kun siirrytään korttiin joka ei ole ajastin
         File kertaustiedosto = kertauspaneeli.hankiTiedosto("Valitse tiedosto");
         if (kertaustiedosto != null){
             kertausmaatti.setTiedosto(kertaustiedosto);
             kertausmaatti.haeTunnisteet();
-            //kertauspaneeli.paivitaTunnistekentta();
             kertauspaneeli.luoTunnisteidenValinta();
             CardLayout cd = (CardLayout)paneelikortit.getLayout();
             cd.show(paneelikortit, "kertain");
             nakyvaKortti = "kertain";
             kertausmaatti.talletaAloitusaika(); //vähän epätarkka paikka tallentaa, mutta menköön
         }
-        
     }
     
     public void alkupaneeli(){
-        //ajastinmaatti.tallennaTiedot();
         CardLayout cd = (CardLayout)paneelikortit.getLayout();
         cd.show(paneelikortit, "alku");
         nakyvaKortti = "alku";
@@ -132,7 +128,6 @@ public class GraafinenUI implements Runnable{
      */
     public void ajastinmaatti(){
         ajastinpaneeli.paivita();
-        //kertausmaatti.tallennaTiedostoon();
         CardLayout cd = (CardLayout)paneelikortit.getLayout();   
         cd.show(paneelikortit, "ajastin");
         nakyvaKortti = "ajastin";
@@ -143,8 +138,6 @@ public class GraafinenUI implements Runnable{
      */
     public void tilastomaatti(){
         tilastot.paivita(ajastinmaatti.getAjastustenKesto(), kertausmaatti.getOpiskelunKesto());
-        //ajastinmaatti.tallennaTiedot(); //tallenna tiedot aina, kun siirretään korttiin joka ei ole ajastin
-        //kertausmaatti.tallennaTiedostoon(); //samoin paitsi kertausmaatille
         CardLayout cd = (CardLayout)paneelikortit.getLayout();
         cd.show(paneelikortit, "tilastot");
         nakyvaKortti = "tilastot";

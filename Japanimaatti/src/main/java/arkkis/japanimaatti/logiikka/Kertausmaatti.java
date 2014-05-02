@@ -18,7 +18,7 @@ public class Kertausmaatti {
     private Kertauspaneeli paneeli;
     private Enum tila;
     private int moneskoRivi;
-    private int kauankoKerrattu = 0; //kauanko kertaumaatti-kortti on ollut näkyvissä ohjelman tällä käyttökerralla
+    private int kauankoKerrattu = 0; //kauanko kertausmaatti-kortti on ollut näkyvissä ohjelman tällä käyttökerralla
     private long aloitusaika;
     
     public Kertausmaatti(){
